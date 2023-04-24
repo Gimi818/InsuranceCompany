@@ -24,8 +24,8 @@ public class Car {
     private int yearOfManufacture;
     private double enginCapacity;
     private int averageKmTraveledPerYear;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "policy_id")
     private Policy policy;
-
 
 }

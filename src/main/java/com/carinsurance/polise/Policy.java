@@ -24,8 +24,6 @@ public class Policy {
 
     private LocalDate endDate;
 
-    @OneToOne(mappedBy = "policy")
-    private Car car;
 
 
 }
