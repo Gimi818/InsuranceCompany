@@ -1,5 +1,6 @@
 package com.carinsurance.car;
 
+import com.carinsurance.polise.Policy;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class Car {
     private int yearOfManufacture;
     private double enginCapacity;
     private int averageKmTraveledPerYear;
+    @OneToOne
+    private Policy policy;
 
 
 }
