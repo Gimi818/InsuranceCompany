@@ -8,13 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+
 import static com.carinsurance.insurancecalculator.FinalNumbers.*;
 
 @Service
 @AllArgsConstructor
 @Data
 public class Calculator {
-
 
 
     public double pointsForAge(Client client) {
@@ -62,7 +63,7 @@ public class Calculator {
         } else if (car.getYearOfManufacture() >= MIDDLE_LIMIT_YEAR_OF_MANUFACTURE) {
             return 0.003;
         } else if (car.getYearOfManufacture() >= HIGHER_LIMIT_YEAR_OF_MANUFACTURE) {
-            return 0.05;
+            return 0.005;
         } else {
             return 0.01;
         }
@@ -73,7 +74,7 @@ public class Calculator {
 
         if (car.getAverageKmTraveledPerYear() < LOWER_LIMIT_KM_PER_YEAR) {
             return 0.001;
-        } else if (car.getAverageKmTraveledPerYear() >= MIDDLE_LIMIT_KM_PER_YEAR) {
+        } else if (car.getAverageKmTraveledPerYear() <= MIDDLE_LIMIT_KM_PER_YEAR) {
             return 0.002;
         } else {
             return 0.006;
@@ -82,9 +83,10 @@ public class Calculator {
     }
 
     public double calculatePrice(Car car, Client client) {
-        double points = pointsForAge(client) + pointsForVehicleAge(car)  + pointsForEnginCapacity(car)
+        double points = pointsForAge(client) + pointsForVehicleAge(car) + pointsForEnginCapacity(car)
                 + pointsForAverageKMTraveledPerYear(car) + pointsForVehicleAge(car);
-        return points * car.getCarValue();
-
+        double price = points * car.getCarValue();
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return Double.parseDouble(decimalFormat.format(price));
     }
 }

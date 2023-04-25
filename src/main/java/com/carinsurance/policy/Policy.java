@@ -19,6 +19,7 @@ public class Policy {
     @Id
     @GeneratedValue
     private Long id;
+    private String policyName;
 
     private double  priceOfInsurance;
     private LocalDate startDate;
