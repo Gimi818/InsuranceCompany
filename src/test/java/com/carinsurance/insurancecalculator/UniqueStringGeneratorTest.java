@@ -12,7 +12,9 @@ class UniqueStringGeneratorTest {
     @Test
     @DisplayName("Should generate string with length 10")
     void generate_string() {
+        //given & when
         String uniqueString = generator.generateUniqueString();
+        //Then
         assertThat(uniqueString).hasSize(10);
     }
 
