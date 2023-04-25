@@ -1,4 +1,4 @@
-package com.carinsurance.polise.dto;
+package com.carinsurance.policy.dto;
 
 import com.carinsurance.car.Car;
 

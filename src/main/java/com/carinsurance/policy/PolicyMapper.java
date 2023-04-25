@@ -1,10 +1,7 @@
-package com.carinsurance.polise;
+package com.carinsurance.policy;
 
-import com.carinsurance.client.Client;
-import com.carinsurance.client.dto.ClientRequestDto;
-import com.carinsurance.client.dto.ClientResponseDto;
-import com.carinsurance.polise.dto.PolicyRequestDto;
-import com.carinsurance.polise.dto.PolicyResponseDto;
+import com.carinsurance.policy.dto.PolicyRequestDto;
+import com.carinsurance.policy.dto.PolicyResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

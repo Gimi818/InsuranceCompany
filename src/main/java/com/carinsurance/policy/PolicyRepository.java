@@ -1,4 +1,4 @@
-package com.carinsurance.polise;
+package com.carinsurance.policy;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.carinsurance.polise.exception;
+package com.carinsurance.policy.exception;
 
 public class PolicyNotFoundException extends RuntimeException {
     public PolicyNotFoundException(Long id) {
