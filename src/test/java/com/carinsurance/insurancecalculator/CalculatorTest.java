@@ -10,8 +10,6 @@ import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-
 class CalculatorTest {
     @Mock
     Client client;

@@ -29,11 +29,12 @@ public class PolicyService {
     private final Calculator calculator;
     private final UniqueStringGenerator generator;
 
-    public Policy savePolicy( Long clientId, Long carId) {
+    public Policy savePolicy(Long clientId, Long carId) {
 
 
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
+
 
         Policy newPolicy = Policy.builder()
                 .policyName(generator.generateUniqueString())

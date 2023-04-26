@@ -24,7 +24,8 @@ public class Client {
 
     private int age;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JoinColumn(name = "client_id")
-    private List<Car> cars;
+    private List<Car> cars = new ArrayList<>();
 }

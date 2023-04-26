@@ -16,8 +16,6 @@ public class PolicyController {
     @PostMapping("/{clientId}/{carId}")
     public ResponseEntity<Policy> savePolicy( @PathVariable Long clientId, @PathVariable Long carId) {
 
-        policyService.savePolicy( clientId, carId);
-
         return new ResponseEntity<>(policyService.savePolicy( clientId, carId), HttpStatus.CREATED);
     }
 
