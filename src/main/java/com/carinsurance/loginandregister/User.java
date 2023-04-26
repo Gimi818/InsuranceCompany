@@ -1,30 +1,22 @@
-package com.carinsurance.policy;
+package com.carinsurance.loginandregister;
+
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name = "policy")
+@Table(name = "user")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
-public class Policy {
+@Data
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String policyName;
-
-    private double  priceOfInsurance;
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-
-
+    private String username;
+    private String password;
 }

@@ -32,7 +32,7 @@ class ClientServiceTest {
 
     @BeforeEach
     void setUp() {
-        clientRequestDto = new ClientRequestDto("John", "New", 30);
+        clientRequestDto = new ClientRequestDto("John", "New", 30,null);
         client = new Client(1L, "John", "New", 30, null);
 
     }
