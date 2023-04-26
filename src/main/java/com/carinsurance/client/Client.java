@@ -1,7 +1,7 @@
 package com.carinsurance.client;
 
 import com.carinsurance.car.Car;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

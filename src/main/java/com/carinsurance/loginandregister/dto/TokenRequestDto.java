@@ -1,11 +1,12 @@
 package com.carinsurance.loginandregister.dto;
 
-import jakarta.validation.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
 
 public record TokenRequestDto(
-        @NotBlank(message = "{password.not.blank}")
+        @NotBlank
         String username,
-        @NotBlank(message = "{password.not.blank}")
+        @NotBlank
         String password) {
 
 }
