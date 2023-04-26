@@ -14,7 +14,7 @@ public class CarController {
 
     private final CarService carService;
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<Car> saveCar(@RequestBody CarRequestDto carRequestDto) {
         return new ResponseEntity<>(carService.saveCar(carRequestDto), HttpStatus.CREATED);
     }
@@ -26,4 +26,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carResponseDto);
 
     }
+
+    @PutMapping("/{carId}/policy/{policyId}")
+    public ResponseEntity<Void> addPolicyToCar(@PathVariable Long carId, @PathVariable Long policyId) {
+        carService.assignPolicyToCar(carId, policyId);
+        return ResponseEntity.ok().build();
+    }
+
 }

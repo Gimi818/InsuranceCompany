@@ -1,6 +1,7 @@
 package com.carinsurance.car;
 
-import com.carinsurance.polise.Policy;
+import com.carinsurance.client.Client;
+import com.carinsurance.policy.Policy;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class Car {
     private int yearOfManufacture;
     private double enginCapacity;
     private int averageKmTraveledPerYear;
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "policy_id")
     private Policy policy;

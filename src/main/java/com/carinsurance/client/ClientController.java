@@ -25,4 +25,9 @@ public class ClientController {
         ClientResponseDto clientResponseDto = clientService.findClientById(id);
         return ResponseEntity.status(HttpStatus.OK).body(clientResponseDto);
     }
+    @PutMapping("/{clientId}/cars/{carId}")
+    public ResponseEntity<Void> addClientToCar( @PathVariable Long clientId ,@PathVariable Long carId) {
+        clientService.assignCarToClient( clientId ,carId);
+        return ResponseEntity.ok().build();
+    }
 }
