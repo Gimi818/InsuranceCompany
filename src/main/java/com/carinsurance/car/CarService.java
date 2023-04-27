@@ -6,6 +6,7 @@ import com.carinsurance.car.exception.CarNotFoundException;
 import com.carinsurance.policy.Policy;
 import com.carinsurance.policy.PolicyRepository;
 import com.carinsurance.policy.exception.PolicyNotFoundException;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,14 @@ import org.springframework.stereotype.Service;
 public class CarService {
 
     private final CarRepository carRepository;
-    private  final CarMapper carMapper;
 
+    private final CarMapper carMapper;
     private final PolicyRepository policyRepository;
+
 
     public Car saveCar(CarRequestDto carRequestDto) {
 
         Car newCar = carRepository.save(carMapper.dtoToEntity(carRequestDto));
-
         return newCar;
     }
 

@@ -4,8 +4,12 @@ import com.carinsurance.car.dto.CarRequestDto;
 import com.carinsurance.car.dto.CarResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 
 @Mapper(componentModel = "spring")
+@Component
 public interface CarMapper {
 
 
@@ -14,9 +18,8 @@ public interface CarMapper {
 
     CarResponseDto entityToDto(Car car);
 
+
     Car dtoToEntity(CarRequestDto carRequestDto);
-
-
 
 
 }

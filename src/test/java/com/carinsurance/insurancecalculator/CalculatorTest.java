@@ -30,7 +30,7 @@ class CalculatorTest {
 
         car = new Car(1L, "BMW", "X5", 62000, carModel, 2016, 3.0, 16000, null);
 
-        secondCar = new Car(2L, "Audi", "A5", 45000, carModel, 2010, 1.8, 32000, null);
+        secondCar = new Car(2L, "Audi", "A5", 45000, carModel, 2012, 1.8, 32000, null);
     }
 
     @Test
@@ -130,33 +130,33 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Should return 0.003 points when vehicle age is in the range 2015 - 2020")
+    @DisplayName("Should return 0.002 points when vehicle age is in the range 2015 - 2020")
     void points_for_vehicle_age() {
         //given & when
         double points = calculator.pointsForVehicleAge(car);
         //then
-        assertThat(points).isEqualTo(0.003);
+        assertThat(points).isEqualTo(0.002);
     }
 
 
     @Test
-    @DisplayName("Should return 0.01points when vehicle age is in the range 2010 - 2015")
+    @DisplayName("Should return 0.004 points when vehicle age is in the range 2010 - 2015")
     void points_for_second_vehicle_age() {
         //given & when
         double points = calculator.pointsForVehicleAge(secondCar);
         //then
-        assertThat(points).isEqualTo(0.01);
+        assertThat(points).isEqualTo(0.004);
     }
 
     @Test
-    @DisplayName("Should return 0 point when the year of manufacture is older than 2010")
+    @DisplayName("Should return 0.01 points when the year of manufacture is older than 2010")
     void points_for_old_vehicle_age() {
         //given
         car.setYearOfManufacture(2000);
         // when
         double points = calculator.pointsForVehicleAge(car);
         //then
-        assertThat(points).isEqualTo(0.0);
+        assertThat(points).isEqualTo(0.01);
     }
 
     @Test
@@ -202,22 +202,22 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Should return insurance price 3038 zł for car ")
+    @DisplayName("Should return insurance price 2914.0 zł for car ")
     void calculate_price() {
         //given
         double price = calculator.calculatePrice(car, client);
         //when
-        assertThat(price).isEqualTo(3038.0);
+        assertThat(price).isEqualTo(2914.0);
         //then
     }
 
     @Test
-    @DisplayName("Should return insurance price 1395 zł for second car ")
+    @DisplayName("Should return insurance price 855.0 zł for second car ")
     void calculate_price_for_second_car() {
         //given & when
         double price = calculator.calculatePrice(secondCar, secondClient);
         //then
-        assertThat(price).isEqualTo(1395.0);
+        assertThat(price).isEqualTo(855.0);
 
     }
 }
