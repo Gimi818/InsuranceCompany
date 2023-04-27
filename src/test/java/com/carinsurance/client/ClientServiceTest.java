@@ -9,9 +9,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
+import java.util.*;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +23,7 @@ class ClientServiceTest {
 
     @Mock
     private ClientRepository clientRepository;
+
     @Mock
     private ClientMapper clientMapper;
 
@@ -30,11 +33,11 @@ class ClientServiceTest {
     private ClientResponseDto clientResponseDto;
     private Client client;
 
+
     @BeforeEach
     void setUp() {
-        clientRequestDto = new ClientRequestDto("John", "New", 30,null);
+        clientRequestDto = new ClientRequestDto("John", "New", 30, null);
         client = new Client(1L, "John", "New", 30, null);
-
     }
 
     @Test

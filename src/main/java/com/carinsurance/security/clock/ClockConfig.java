@@ -1,4 +1,4 @@
-package com.carinsurance.clock;
+package com.carinsurance.security.clock;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

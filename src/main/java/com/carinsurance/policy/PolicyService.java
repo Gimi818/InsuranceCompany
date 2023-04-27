@@ -8,11 +8,10 @@ import com.carinsurance.client.ClientRepository;
 import com.carinsurance.client.exception.ClientNotFoundException;
 import com.carinsurance.insurancecalculator.Calculator;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
-import com.carinsurance.policy.dto.PolicyRequestDto;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import com.carinsurance.policy.exception.PolicyNotFoundException;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,7 +19,7 @@ import java.time.LocalDate;
 import static com.carinsurance.policy.PolicyMapper.policyMapper;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PolicyService {
 
     private final PolicyRepository policyRepository;
@@ -30,7 +29,6 @@ public class PolicyService {
     private final UniqueStringGenerator generator;
 
     public Policy savePolicy(Long clientId, Long carId) {
-
 
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
@@ -42,7 +40,7 @@ public class PolicyService {
                 .endDate(LocalDate.now().plusYears(1))
                 .priceOfInsurance(calculator.calculatePrice(car, client))
                 .build();
-        newPolicy = policyRepository.save(newPolicy);
+        policyRepository.save(newPolicy);
 
         return newPolicy;
 

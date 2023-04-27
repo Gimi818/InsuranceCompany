@@ -22,7 +22,7 @@ public class LoginAndRegisterService {
         return new RegistrationUserResponseDto(savedUser.getId(), true, savedUser.getUsername());
     }
 
-    public UserDto findByUsername(String username) {
+    public UserDto findByUserName(String username) {
         return loginRepository.findByUsername(username)
                 .map(user -> new UserDto(user.getId(), user.getUsername(), user.getPassword()))
                 .orElseThrow(() -> new BadCredentialsException(USER_NOT_FOUND));
