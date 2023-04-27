@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/policy")
+@RequestMapping("/policies")
 public class PolicyController {
     private final PolicyService policyService;
 
-    @PostMapping("/{clientId}/{carId}")
+    @PostMapping("/{clientId}/cars/{carId}")
     public ResponseEntity<Policy> savePolicy( @PathVariable Long clientId, @PathVariable Long carId) {
 
         return new ResponseEntity<>(policyService.savePolicy( clientId, carId), HttpStatus.CREATED);

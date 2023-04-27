@@ -17,15 +17,15 @@ import static com.carinsurance.insurancecalculator.FinalNumbers.*;
 @Data
 public class Calculator {
 
-
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     public double pointsForAge(Client client) {
 
         if (client.getAge() < LOWER_AGE_LIMIT) {
-            return 0.005;
+            return 0.035;
         } else if (client.getAge() <= MIDDLE_AGE_LIMIT) {
-            return 0;
+            return 0.001;
         } else {
-            return 0.007;
+            return 0.02;
         }
 
     }
@@ -45,12 +45,12 @@ public class Calculator {
 
     }
 
-    public double pointsForTypeOfVehicle(CarModel carModel) {
+    public double pointsForTypeOfVehicle(Car car) {
 
-        if (carModel == CarModel.CAR) {
-            return 0.002;
-        } else if (carModel == CarModel.LORRY) {
-            return 0.01;
+        if (car.getCarmodel() == CarModel.CAR) {
+            return 0.001;
+        } else if (car.getCarmodel() == CarModel.LORRY) {
+            return 0.03;
         } else
             return 0;
 
@@ -63,11 +63,9 @@ public class Calculator {
         } else if (car.getYearOfManufacture() >= MIDDLE_LIMIT_YEAR_OF_MANUFACTURE) {
             return 0.003;
         } else if (car.getYearOfManufacture() >= HIGHER_LIMIT_YEAR_OF_MANUFACTURE) {
-            return 0.005;
-        } else {
             return 0.01;
         }
-
+        return 0;
     }
 
     public double pointsForAverageKMTraveledPerYear(Car car) {
@@ -83,10 +81,13 @@ public class Calculator {
     }
 
     public double calculatePrice(Car car, Client client) {
-        double points = pointsForAge(client) + pointsForVehicleAge(car) + pointsForEnginCapacity(car)
-                + pointsForAverageKMTraveledPerYear(car) + pointsForVehicleAge(car);
+        double points = pointsForAge(client)
+                + pointsForVehicleAge(car)
+                + pointsForEnginCapacity(car)
+                + pointsForAverageKMTraveledPerYear(car)
+                + pointsForVehicleAge(car)
+                + pointsForTypeOfVehicle(car);
         double price = points * car.getCarValue();
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
         return Double.parseDouble(decimalFormat.format(price));
     }
 }

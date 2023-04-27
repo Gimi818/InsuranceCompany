@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/clients")
@@ -16,7 +18,7 @@ public class ClientController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<Client> saveClient(@RequestBody ClientRequestDto clientRequestDto) {
+    public ResponseEntity<Client> saveClient(@Valid  @RequestBody ClientRequestDto clientRequestDto) {
         return new ResponseEntity<>(clientService.saveClient(clientRequestDto), HttpStatus.CREATED);
     }
 

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cars")
@@ -15,7 +17,7 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping("/add")
-    public ResponseEntity<Car> saveCar(@RequestBody CarRequestDto carRequestDto) {
+    public ResponseEntity<Car> saveCar(@Valid @RequestBody CarRequestDto carRequestDto) {
         return new ResponseEntity<>(carService.saveCar(carRequestDto), HttpStatus.CREATED);
     }
 
@@ -27,7 +29,7 @@ public class CarController {
 
     }
 
-    @PutMapping("/{carId}/policy/{policyId}")
+    @PutMapping("/{carId}/policies/{policyId}")
     public ResponseEntity<Void> addPolicyToCar(@PathVariable Long carId, @PathVariable Long policyId) {
         carService.assignPolicyToCar(carId, policyId);
         return ResponseEntity.ok().build();
