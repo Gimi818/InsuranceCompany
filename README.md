@@ -30,47 +30,63 @@ I used a Mysql database to implement the relationships in the database
  
  ## How to use apllication in postman
  
-    Step 1 : POST localhost:8080/register 
+    Step 1 :
+    POST localhost:8080/register 
     Enter your username and password. 
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/1.PNG" width="500" heigt="700"/>
   
-    Step 2 : POST localhost:8080/token
+    Step 2 :
+    POST localhost:8080/token
     Enter username and password to get token.
     
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/2.PNG" width="500" heigt="700"/>
   
-    Step 3.1 : Select the authorization field and select the Bearer token option and paste the token you received
+    Step 3.1 : 
+    Select the authorization field and select the Bearer token option 
+    and paste the token you received
     
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3.1.PNG" width="500" heigt="700"/>
   
-    Step 3.2 :POST localhost:8080/clients/add
+    Step 3.2 :
+    POST localhost:8080/clients/add
     Enter personal data 
+    And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3.2.PNG" width="500" heigt="700"/>
   
-    Step 4 : POST localhost:8080/cars/add
+    Step 4 : 
+    POST localhost:8080/cars/add
     Enter vehicle details
+    And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/4.PNG" width="500" heigt="700"/>
   
-    Step 5 : PUT localhost:8080/clients/1/cars/1
+    Step 5 : 
+    PUT localhost:8080/clients/1/cars/1
     Assign the car to the client by id
+    And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/5.PNG" width="500" heigt="700"/>
   
-    Step 6 : POST localhost:8080/policies/1/cars/1
+    Step 6 : 
+    POST localhost:8080/policies/1/cars/1
     Calculate insurance prices and create policy
+    And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.PNG" width="500" heigt="700"/>
   
-    Step 7 : PUT localhost:8080/cars/1/policies/1
+    Step 7 : 
+    PUT localhost:8080/cars/1/policies/1
     Assing the policy to the car by id
+    And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/7.PNG" width="500" heigt="700"/>
   
-    Step 8 : GET localhost:8080/clients/1
+    Step 8 : 
+    GET localhost:8080/clients/1
     Get all your data
+    And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8.PNG" width="500" heigt="700"/>
  
