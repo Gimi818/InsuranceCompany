@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping("/add")
-    public ResponseEntity<Car> saveCar(@Valid @RequestBody CarRequestDto carRequestDto) {
+    public ResponseEntity<Car> saveCar(@RequestBody CarRequestDto carRequestDto) {
         return new ResponseEntity<>(carService.saveCar(carRequestDto), HttpStatus.CREATED);
     }
 

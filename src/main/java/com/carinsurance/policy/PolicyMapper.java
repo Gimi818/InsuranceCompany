@@ -13,7 +13,6 @@ public interface PolicyMapper {
 
     PolicyResponseDto entityToDto(Policy policy);
 
-    Policy dtoToEntity(PolicyRequestDto policyRequestDto);
 }
 
 

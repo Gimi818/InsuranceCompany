@@ -7,14 +7,19 @@ import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 import com.carinsurance.client.exception.ClientNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static com.carinsurance.client.ClientMapper.clientMapper;
 
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ClientService {
-    private final ClientMapper clientMapper;
+
     private final ClientRepository clientRepository;
+
+    private final ClientMapper clientMapper;
     private final CarRepository carRepository;
 
 

@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties(value = {JwtConfigurationProperties.class})
+
 public class CarInsuranceApplication {
 
     public static void main(String[] args) {

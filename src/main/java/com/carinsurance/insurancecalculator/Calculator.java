@@ -58,15 +58,16 @@ public class Calculator {
 
     public double pointsForVehicleAge(Car car) {
 
-        if (car.getYearOfManufacture() > LOWER_LIMIT_YEAR_OF_MANUFACTURE) {
-            return 0.001;
-        } else if (car.getYearOfManufacture() >= MIDDLE_LIMIT_YEAR_OF_MANUFACTURE) {
-            return 0.003;
-        } else if (car.getYearOfManufacture() >= HIGHER_LIMIT_YEAR_OF_MANUFACTURE) {
+        if (car.getYearOfManufacture() < HIGHER_LIMIT_YEAR_OF_MANUFACTURE) {
             return 0.01;
+        } else if (car.getYearOfManufacture() < MIDDLE_LIMIT_YEAR_OF_MANUFACTURE) {
+            return 0.004;
+        } else if (car.getYearOfManufacture() <= LOWER_LIMIT_YEAR_OF_MANUFACTURE) {
+            return 0.002;
         }
-        return 0;
+        return 0.001;
     }
+
 
     public double pointsForAverageKMTraveledPerYear(Car car) {
 
