@@ -8,6 +8,7 @@ import com.carinsurance.client.dto.ClientResponseDto;
 import com.carinsurance.client.exception.ClientNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import static com.carinsurance.client.ClientMapper.clientMapper;
@@ -15,6 +16,7 @@ import static com.carinsurance.client.ClientMapper.clientMapper;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ClientService {
 
     private final ClientRepository clientRepository;
@@ -24,21 +26,26 @@ public class ClientService {
 
 
     public Client saveClient(ClientRequestDto clientRequestDto) {
+        log.info("Saving client {}", clientRequestDto);
         Client client = clientRepository.save(clientMapper.dtoToEntity(clientRequestDto));
+        log.info("Saved client {}", client);
         return client;
     }
 
 
     public ClientResponseDto findClientById(Long id) {
-
+        log.info("Finding client with ID {}", id);
         Client client = clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException(id));
+        log.info("Found client {}", client);
         return clientMapper.entityToDto(client);
     }
 
     public Client assignCarToClient(Long clientId, Long carId) {
+        log.info("Assigning car with ID {} to client with ID {}", carId, clientId);
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
         client.getCars().add(car);
+        log.info("Assigned car with ID {} to client with ID {}", carId, clientId);
         return clientRepository.save(client);
     }
 
