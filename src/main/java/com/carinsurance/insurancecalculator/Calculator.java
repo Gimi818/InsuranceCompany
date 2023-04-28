@@ -6,6 +6,8 @@ import com.carinsurance.client.Client;
 import com.carinsurance.policy.Policy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -14,10 +16,12 @@ import static com.carinsurance.insurancecalculator.FinalNumbers.*;
 
 @Service
 @AllArgsConstructor
-@Data
+@Getter
+@Log4j2
 public class Calculator {
 
     private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
     public double pointsForAge(Client client) {
 
         if (client.getAge() < LOWER_AGE_LIMIT) {
@@ -82,6 +86,7 @@ public class Calculator {
     }
 
     public double calculatePrice(Car car, Client client) {
+        log.info("Calculating insurance price for car with ID {} and client with ID {}", car.getId(), client.getId());
         double points = pointsForAge(client)
                 + pointsForVehicleAge(car)
                 + pointsForEnginCapacity(car)
@@ -89,6 +94,7 @@ public class Calculator {
                 + pointsForVehicleAge(car)
                 + pointsForTypeOfVehicle(car);
         double price = points * car.getCarValue();
+        log.info("Calculated insurance price is: {}", decimalFormat.format(price));
         return Double.parseDouble(decimalFormat.format(price));
     }
 }
