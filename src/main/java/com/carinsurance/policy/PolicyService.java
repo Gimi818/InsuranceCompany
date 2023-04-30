@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-import static com.carinsurance.policy.PolicyMapper.policyMapper;
+
 
 @Service
 @AllArgsConstructor
@@ -28,6 +28,7 @@ public class PolicyService {
     private final CarRepository carRepository;
     private final ClientRepository clientRepository;
     private final Calculator calculator;
+    private final PolicyMapper policyMapper;
     private final UniqueStringGenerator generator;
 
     public Policy savePolicy(Long clientId, Long carId) {

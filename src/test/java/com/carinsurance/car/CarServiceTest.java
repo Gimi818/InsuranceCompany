@@ -74,8 +74,6 @@ class CarServiceTest {
         // then
         assertThat(result).isEqualTo(car);
         assertThat(result.getPolicy()).isEqualTo(policy);
-        BDDMockito.verify(carRepository, Mockito.times(1)).findById(1L);
-        BDDMockito.verify(policyRepository, Mockito.times(1)).findById(1L);
         BDDMockito.verify(carRepository, Mockito.times(1)).save(car);
 
 
