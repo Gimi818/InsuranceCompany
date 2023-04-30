@@ -38,7 +38,7 @@ class CalculatorTest {
     void points_for_client_age() {
 
         //given && when
-        double points = calculator.pointsForAge(client);
+        double points = calculator.pointsForClientAge(client);
         //then
         assertThat(points).isEqualTo(0.035);
     }
@@ -49,7 +49,7 @@ class CalculatorTest {
     void points_for_second_client_age() {
 
         //given && when
-        double points = calculator.pointsForAge(secondClient);
+        double points = calculator.pointsForClientAge(secondClient);
         //then
         assertThat(points).isEqualTo(0.001);
     }
@@ -60,7 +60,7 @@ class CalculatorTest {
         //given
         client.setAge(70);
         // when
-        double points = calculator.pointsForAge(client);
+        double points = calculator.pointsForClientAge(client);
         //then
         assertThat(points).isEqualTo(0.02);
     }

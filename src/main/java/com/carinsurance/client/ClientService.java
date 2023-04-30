@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -39,6 +39,7 @@ public class ClientService {
         return clientMapper.entityToDto(client);
     }
 
+    @Transactional
     public Client assignCarToClient(Long clientId, Long carId) {
         log.info("Assigning car with ID {} to client with ID {}", carId, clientId);
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
