@@ -5,7 +5,9 @@ import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -21,17 +23,20 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.SerializationFeature;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest("WebEnvironment.RANDOM_PORT")
 @WithMockUser
@@ -48,7 +53,7 @@ class ClientControllerTest {
     private static String clientRequestDtoJson;
     private static Client client;
     private static ClientResponseDto clientResponseDto;
-
+    private static ClientResponseDto secondClientResponseDto;
 
     @BeforeEach
     void setUp() throws JsonProcessingException {
@@ -59,6 +64,7 @@ class ClientControllerTest {
         clientRequestDto = new ClientRequestDto("John", "Smith", 30, null);
         clientRequestDtoJson = objectMapper.writeValueAsString(clientRequestDto);
         clientResponseDto = new ClientResponseDto(1L, "John", "Smith", 30, null);
+        secondClientResponseDto = new ClientResponseDto(2L, "Adam", "Nowak", 32, null);
 
     }
 
@@ -87,5 +93,22 @@ class ClientControllerTest {
                 .andExpect(jsonPath("$.lastname").value("Smith"))
                 .andExpect(jsonPath("$.age").value(30));
     }
+
+    @Test
+    void should_find_all_clients() throws Exception {
+        List<ClientResponseDto> clientResponseList = List.of(clientResponseDto, secondClientResponseDto);
+        BDDMockito.given(clientService.findAllClient())
+                .willReturn(clientResponseList);
+
+        MvcResult mvcResult = mockMvc.perform(get("/clients"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String clientDtoJson = mvcResult.getResponse().getContentAsString();
+        List<Client> clientsResult = new ObjectMapper()
+                .readValue(clientDtoJson, new TypeReference<>(){});
+        assertThat(clientsResult).hasSize(2);
+    }
+
 }
 
