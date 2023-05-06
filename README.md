@@ -15,6 +15,9 @@ In the next step, the application creates an individual policy assigned to the c
 The policy contains a unique name, policy start and end date and insurance price. 
 I used a Mysql database to implement the relationships in the database
  One customer can have multiple vehicles and one vehicle can have one insurance policy
+The application has an implemented swagger.
+When you have launched the application, click on the link:
+http://localhost:8080/swagger-ui/index.html#/
  
  ## Application is developed using following technologies:
  Core:
