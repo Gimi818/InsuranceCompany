@@ -1,10 +1,10 @@
 package com.carinsurance.client;
 
 import com.carinsurance.car.Car;
+
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 import java.util.*;
 
@@ -12,16 +12,16 @@ import java.util.*;
 @Table(name = "client")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstname;
     private String lastname;
-
     private int age;
 
     @OneToMany(cascade = CascadeType.ALL,

@@ -1,9 +1,7 @@
 package com.carinsurance.policy;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,7 +9,9 @@ import java.time.LocalDate;
 @Table(name = "policy")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class Policy {
 

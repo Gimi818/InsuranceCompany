@@ -9,8 +9,12 @@ import com.carinsurance.client.exception.ClientNotFoundException;
 import lombok.AllArgsConstructor;
 
 import lombok.extern.log4j.Log4j2;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -39,7 +43,14 @@ public class ClientService {
         return clientMapper.entityToDto(client);
     }
 
-    @Transactional
+    public List<ClientResponseDto> findAllClient() {
+        log.info("Finding all clients...");
+        return clientRepository.findAllClients().stream()
+                .map(clientMapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+
     public Client assignCarToClient(Long clientId, Long carId) {
         log.info("Assigning car with ID {} to client with ID {}", carId, clientId);
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));

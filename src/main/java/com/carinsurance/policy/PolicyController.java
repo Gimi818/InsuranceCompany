@@ -1,6 +1,6 @@
 package com.carinsurance.policy;
 
-import com.carinsurance.policy.dto.PolicyRequestDto;
+
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

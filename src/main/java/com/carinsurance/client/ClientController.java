@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,8 +18,14 @@ public class ClientController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<Client> saveClient( @RequestBody ClientRequestDto clientRequestDto) {
+    public ResponseEntity<Client> saveClient(@RequestBody ClientRequestDto clientRequestDto) {
         return new ResponseEntity<>(clientService.saveClient(clientRequestDto), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ClientResponseDto>> findAllClients() {
+        List<ClientResponseDto> allClients = clientService.findAllClient();
+        return ResponseEntity.status(HttpStatus.OK).body(allClients);
     }
 
     @GetMapping("/{id}")
@@ -27,9 +33,10 @@ public class ClientController {
         ClientResponseDto clientResponseDto = clientService.findClientById(id);
         return ResponseEntity.status(HttpStatus.OK).body(clientResponseDto);
     }
+
     @PutMapping("/{clientId}/cars/{carId}")
-    public ResponseEntity<Void> addClientToCar( @PathVariable Long clientId ,@PathVariable Long carId) {
-        clientService.assignCarToClient( clientId ,carId);
+    public ResponseEntity<Void> addClientToCar(@PathVariable Long clientId, @PathVariable Long carId) {
+        clientService.assignCarToClient(clientId, carId);
         return ResponseEntity.ok().build();
     }
 }

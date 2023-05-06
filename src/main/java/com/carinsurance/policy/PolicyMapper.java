@@ -1,6 +1,6 @@
 package com.carinsurance.policy;
 
-import com.carinsurance.policy.dto.PolicyRequestDto;
+
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

@@ -7,7 +7,6 @@ import com.carinsurance.car.dto.CarResponseDto;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,9 +20,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingExcept
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.SerializationFeature;
 
-import static org.mockito.BDDMockito.verify;
-import static org.mockito.BDDMockito.times;
-
+import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -58,7 +55,7 @@ class CarControllerTest {
 
     @Test
     void should_save_car() throws Exception {
-        BDDMockito.given(carService.saveCar(carRequestDto)).willReturn(car);
+        given(carService.saveCar(carRequestDto)).willReturn(car);
 
         mockMvc.perform(post("/cars/add")
                         .content(carRequestDtoJson)
@@ -69,7 +66,7 @@ class CarControllerTest {
 
     @Test
     void should_find_car_by_id() throws Exception {
-        BDDMockito.given(carService.findCarById(1L)).willReturn(carResponseDto);
+        given(carService.findCarById(1L)).willReturn(carResponseDto);
 
         mockMvc.perform(get("/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
