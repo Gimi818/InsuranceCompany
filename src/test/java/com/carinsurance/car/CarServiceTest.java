@@ -21,6 +21,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.mockito.BDDMockito.given;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -47,7 +48,7 @@ class CarServiceTest {
 
     @Test
     void should_save_car() {
-        BDDMockito.given(carRepository.save(carMapper.dtoToEntity(carRequestDto)))
+       given(carRepository.save(carMapper.dtoToEntity(carRequestDto)))
                 .willReturn(car);
         assertThat(carService.saveCar(carRequestDto))
                 .isEqualTo(car);
@@ -55,8 +56,8 @@ class CarServiceTest {
 
     @Test
     void should_find_car_by_id() {
-        BDDMockito.given(carRepository.findById(1L)).willReturn(Optional.of(car));
-        BDDMockito.given(carMapper.entityToDto(car))
+        given(carRepository.findById(1L)).willReturn(Optional.of(car));
+        given(carMapper.entityToDto(car))
                 .willReturn(carResponseDto);
 
         assertThat(carService.findCarById(1L)).isEqualTo(carResponseDto);
@@ -65,9 +66,9 @@ class CarServiceTest {
     @Test
     void should_assign_policy_to_car() {
         Policy policy = new Policy(1L,"X83DSHA2",1000,LocalDate.now(),LocalDate.now().plusYears(1));
-        BDDMockito.given(carRepository.findById(1L)).willReturn(Optional.of(car));
-        BDDMockito.given(policyRepository.findById(1L)).willReturn(Optional.of(policy));
-        BDDMockito.given(carRepository.save(car)).willReturn(car);
+        given(carRepository.findById(1L)).willReturn(Optional.of(car));
+        given(policyRepository.findById(1L)).willReturn(Optional.of(policy));
+        given(carRepository.save(car)).willReturn(car);
 
         // when
         Car result = carService.assignPolicyToCar(1L, 1L);
@@ -78,13 +79,14 @@ class CarServiceTest {
 
 
     }
+
     @Test
     @DisplayName("Should throw a car not found exception when passing a non-existent car id to add a policy to the car")
     void should_throw_car_not_found_exception() {
         // given
         Long nonExistingCarId = 100L;
 
-        BDDMockito.given(carRepository.findById(nonExistingCarId)).willReturn(Optional.empty());
+        given(carRepository.findById(nonExistingCarId)).willReturn(Optional.empty());
 
         // when
         Throwable throwable = catchThrowable(() -> carService.assignPolicyToCar(nonExistingCarId, 1L));
@@ -99,8 +101,8 @@ class CarServiceTest {
         // given
         Long nonExistingPolicyId = 100L;
 
-        BDDMockito.given(carRepository.findById(1L)).willReturn(Optional.of(car));
-        BDDMockito.given(policyRepository.findById(nonExistingPolicyId)).willReturn(Optional.empty());
+        given(carRepository.findById(1L)).willReturn(Optional.of(car));
+        given(policyRepository.findById(nonExistingPolicyId)).willReturn(Optional.empty());
 
         // when
         Throwable throwable = catchThrowable(() -> carService.assignPolicyToCar(car.getId(), nonExistingPolicyId));

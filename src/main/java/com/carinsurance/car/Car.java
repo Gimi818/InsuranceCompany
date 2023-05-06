@@ -1,17 +1,17 @@
 package com.carinsurance.car;
 
-import com.carinsurance.client.Client;
 import com.carinsurance.policy.Policy;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Entity
 @Table(name = "car")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

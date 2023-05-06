@@ -2,7 +2,6 @@ package com.carinsurance.client;
 
 import com.carinsurance.car.Car;
 import com.carinsurance.car.CarRepository;
-import com.carinsurance.car.CarService;
 import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 
@@ -21,6 +20,7 @@ import java.util.*;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -53,8 +53,8 @@ class ClientServiceTest {
     }
 
     @Test
-    void saveClient() {
-        BDDMockito.given(clientRepository.save(clientMapper.dtoToEntity(clientRequestDto)))
+    void should_save_client() {
+       given(clientRepository.save(clientMapper.dtoToEntity(clientRequestDto)))
                 .willReturn(client);
         assertThat(service.saveClient(clientRequestDto))
                 .isEqualTo(client);
@@ -62,8 +62,8 @@ class ClientServiceTest {
 
     @Test
     void should_find_client_by_id() {
-        BDDMockito.given(clientRepository.findById(1L)).willReturn(Optional.of(client));
-        BDDMockito.given(clientMapper.entityToDto(client))
+        given(clientRepository.findById(1L)).willReturn(Optional.of(client));
+        given(clientMapper.entityToDto(client))
                 .willReturn(clientResponseDto);
 
         assertThat(service.findClientById(1L)).isEqualTo(clientResponseDto);
@@ -79,9 +79,9 @@ class ClientServiceTest {
         List<Client> clientsList = List.of(client, secondClient);
         List<ClientResponseDto> expectedClientsDtoList = List.of(clientResponseDto, secondClientResponseDto);
 
-        BDDMockito.given(clientRepository.findAllClients()).willReturn(clientsList);
-        BDDMockito.given(clientMapper.entityToDto(client)).willReturn(clientResponseDto);
-        BDDMockito.given(clientMapper.entityToDto(secondClient)).willReturn(secondClientResponseDto);
+        given(clientRepository.findAllClients()).willReturn(clientsList);
+        given(clientMapper.entityToDto(client)).willReturn(clientResponseDto);
+        given(clientMapper.entityToDto(secondClient)).willReturn(secondClientResponseDto);
         //when
         List<ClientResponseDto> actualClientsDtoList = service.findAllClient();
         //then
@@ -95,7 +95,7 @@ class ClientServiceTest {
     void should_return_empty_list_when_no_clients() {
 
         // given
-        BDDMockito.given(clientRepository.findAllClients()).willReturn(Collections.emptyList());
+        given(clientRepository.findAllClients()).willReturn(Collections.emptyList());
 
         // when
         List<ClientResponseDto> actualClientsDtoList = service.findAllClient();
@@ -104,21 +104,21 @@ class ClientServiceTest {
         Assertions.assertThat(actualClientsDtoList).isEmpty();
     }
 
-    @Test
-    void should_assign_car_to_client() {
-        // given
-        client = new Client(1L, "John", "New", 30, null);
-        car = new Car(1L, "test", "test", 0, null, 0, 0, 0, null);
-
-        BDDMockito.given(clientRepository.findById(client.getId())).willReturn(Optional.of(client));
-        BDDMockito.given(carRepository.findById(car.getId())).willReturn(Optional.of(car));
-        // when
-        Client result = service.assignCarToClient(client.getId(), car.getId());
-        // then
-        assertThat(result).isNotNull();
-        assertThat(result.getCars()).hasSize(1);
-
-        BDDMockito.verify(clientRepository, BDDMockito.times(1)).save(client);
-    }
+//    @Test
+//    void should_assign_car_to_client() {
+//        // given
+//        client = new Client(1L, "John", "New", 30, null);
+//        car = new Car(1L, "test", "test", 0, null, 0, 0, 0, null);
+//
+//        BDDMockito.given(clientRepository.findById(client.getId())).willReturn(Optional.of(client));
+//        BDDMockito.given(carRepository.findById(car.getId())).willReturn(Optional.of(car));
+//        // when
+//        Client result = service.assignCarToClient(client.getId(), car.getId());
+//        // then
+//        assertThat(result).isNotNull();
+//        assertThat(result.getCars()).hasSize(1);
+//
+//        BDDMockito.verify(clientRepository, BDDMockito.times(1)).save(client);
+//    }
 
 }

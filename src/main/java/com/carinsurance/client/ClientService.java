@@ -9,9 +9,9 @@ import com.carinsurance.client.exception.ClientNotFoundException;
 import lombok.AllArgsConstructor;
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.domain.PageRequest;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,7 +55,7 @@ public class ClientService {
         log.info("Assigning car with ID {} to client with ID {}", carId, clientId);
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
-            client.getCars().add(car);
+        client.getCars().add(car);
         log.info("Assigned car with ID {} to client with ID {}", carId, clientId);
         return clientRepository.save(client);
     }
