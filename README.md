@@ -89,5 +89,9 @@ I used a Mysql database to implement the relationships in the database
     And add your token to the authorisation
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8.PNG" width="500" heigt="700"/>
+  
+    Endpoints available in the application :
+  
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endPoints.PNG" width="500" heigt="500"/>
  
 
