@@ -31,7 +31,7 @@ The application has an implemented swagger.
  
  ## To run the application, follow these steps:
 - Install Intellij IDEA and MySql on your computer.
-- Create date base in MySql and enter yours password in application.propertis
+- Create date base in MySql and enter yours date base name and password in application.propertis
 - Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/CarInsurance.git
 - Run the applications in Intellij IDEA.
 - Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
