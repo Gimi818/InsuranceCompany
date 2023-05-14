@@ -10,7 +10,7 @@ The application, using the data provided by the
 client and calculates the price of his car insurance.
 The logic for calculating the insurance price uses data such as :
 client's age, engine capacity, vehicle type, vehicle price, year of production, average kilometres driven per year.
-In the next step, the application creates an individual policy assigned to the client and the car in question.
+In the next step, the application creates an individual policy assigned to the client and the car in request.
 The policy contains a unique name, policy start and end date and insurance price. 
 I used a Mysql database to implement the relationships in the database
 one customer can have multiple vehicles and one vehicle can have one insurance policy.
@@ -30,7 +30,8 @@ The application has an implemented swagger.
  <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="90" height="50"/></a> </p>
  
  ## To run the application, follow these steps:
-- Install Intellij IDEA and MySql on your computer. 
+- Install Intellij IDEA and MySql on your computer.
+- Create date base in MySql and enter yours password in application.propertis
 - Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/CarInsurance.git
 - Run the applications in Intellij IDEA.
 - Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
