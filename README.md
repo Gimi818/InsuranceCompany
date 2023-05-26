@@ -103,4 +103,10 @@ The application has an implemented swagger.
   
    <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endPoints.PNG" width="500" heigt="500"/>
  
+ ## Tests in application: 
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests2.1.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests2.2.PNG" width="500" heigt="700"/>
+ 
+ 
+ 
 
