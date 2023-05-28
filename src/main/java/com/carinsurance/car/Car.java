@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

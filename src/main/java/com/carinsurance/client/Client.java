@@ -14,7 +14,6 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Client {
 
     @Id

@@ -6,20 +6,21 @@ import com.carinsurance.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 import static com.carinsurance.insurancecalculator.FinalNumbers.*;
 
-@Service
+@Component
 @AllArgsConstructor
 @Getter
 @Log4j2
 public class Calculator {
 
     private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
 
     public double pointsForClientAge(Client client) {
 
@@ -84,16 +85,25 @@ public class Calculator {
 
     }
 
-    public double calculatePrice(Car car, Client client) {
-        log.info("Calculating insurance price for car with ID {} and client with ID {}", car.getId(), client.getId());
-        double points = pointsForClientAge(client)
+    public double calculatePoints(Car car, Client client) {
+        log.info("Calculating points for car with ID {} and client with ID {}", car.getId(), client.getId());
+        double points = 0;
+         points = pointsForClientAge(client)
                 + pointsForVehicleAge(car)
                 + pointsForEnginCapacity(car)
                 + pointsForAverageKMTraveledPerYear(car)
                 + pointsForVehicleAge(car)
                 + pointsForTypeOfVehicle(car);
-        double price = points * car.getCarValue();
-        log.info("Calculated insurance price is: {}", decimalFormat.format(price));
+        log.info("Calculated points is: {}", points);
+        return points;
+    }
+
+    public double calculatePrice(Car car , Client client){
+        log.info("Calculating insurance price for car with ID {} and client with ID {}", car.getId(), client.getId());
+        double price = calculatePoints(car,client) * car.getCarValue();
+        log.info("Calculated insurance price is: {}", price);
         return Double.parseDouble(decimalFormat.format(price));
     }
+
+
 }
