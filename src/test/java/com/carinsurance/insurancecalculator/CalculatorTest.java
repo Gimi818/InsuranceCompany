@@ -24,9 +24,9 @@ class CalculatorTest {
     @BeforeEach
     void setUp() {
 
-        client = new Client(null, "test", "test", 22, null);
+        client = new Client(1L, "test", "test", 22, null);
 
-        secondClient = new Client(null, "test", "test", 28, null);
+        secondClient = new Client(2L, "test", "test", 28, null);
 
         car = new Car(1L, "BMW", "X5", 62000, carModel, 2016, 3.0, 16000, null);
 
@@ -220,4 +220,26 @@ class CalculatorTest {
         assertThat(price).isEqualTo(855.0);
 
     }
+
+    @Test
+    @DisplayName("Should return sum points = 0.047")
+    void calculate_points() {
+        //given & when
+        double points = calculator.calculatePoints(car, client);
+        //then
+        assertThat(points).isEqualTo(0.04700000000000001);
+
+    }
+
+    @Test
+    @DisplayName("Should return sum points = 0.019")
+    void calculate_points_for_second_client() {
+        //given & when
+        double points = calculator.calculatePoints(secondCar, secondClient);
+        //then
+        assertThat(points).isEqualTo(0.019000000000000003);
+
+    }
+
+
 }
