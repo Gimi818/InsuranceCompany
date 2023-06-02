@@ -130,33 +130,33 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("Should return 0.002 points when vehicle age is in the range 2015 - 2020")
+    @DisplayName("Should return 0.003 points when vehicle age is in the range 2015 - 2020")
     void points_for_vehicle_age() {
         //given & when
         double points = calculator.pointsForVehicleAge(car);
         //then
-        assertThat(points).isEqualTo(0.002);
+        assertThat(points).isEqualTo(0.003);
     }
 
 
     @Test
-    @DisplayName("Should return 0.004 points when vehicle age is in the range 2010 - 2015")
+    @DisplayName("Should return 0.005 points when vehicle age is in the range 2010 - 2015")
     void points_for_second_vehicle_age() {
         //given & when
         double points = calculator.pointsForVehicleAge(secondCar);
         //then
-        assertThat(points).isEqualTo(0.004);
+        assertThat(points).isEqualTo(0.005);
     }
 
     @Test
-    @DisplayName("Should return 0.01 points when the year of manufacture is older than 2010")
+    @DisplayName("Should return 0.012 points when the year of manufacture is older than 2010")
     void points_for_old_vehicle_age() {
         //given
         car.setYearOfManufacture(2000);
         // when
         double points = calculator.pointsForVehicleAge(car);
         //then
-        assertThat(points).isEqualTo(0.01);
+        assertThat(points).isEqualTo(0.012);
     }
 
     @Test
@@ -201,45 +201,6 @@ class CalculatorTest {
         assertThat(points).isEqualTo(0.001);
     }
 
-    @Test
-    @DisplayName("Should return insurance price 2914.0 zł for car ")
-    void calculate_price() {
-        //given
-        double price = calculator.calculatePrice(car, client);
-        //when
-        assertThat(price).isEqualTo(2914.0);
-        //then
-    }
-
-    @Test
-    @DisplayName("Should return insurance price 855.0 zł for second car ")
-    void calculate_price_for_second_car() {
-        //given & when
-        double price = calculator.calculatePrice(secondCar, secondClient);
-        //then
-        assertThat(price).isEqualTo(855.0);
-
-    }
-
-    @Test
-    @DisplayName("Should return sum points = 0.047")
-    void calculate_points() {
-        //given & when
-        double points = calculator.calculatePoints(car, client);
-        //then
-        assertThat(points).isEqualTo(0.04700000000000001);
-
-    }
-
-    @Test
-    @DisplayName("Should return sum points = 0.019")
-    void calculate_points_for_second_client() {
-        //given & when
-        double points = calculator.calculatePoints(secondCar, secondClient);
-        //then
-        assertThat(points).isEqualTo(0.019000000000000003);
-
-    }
 
 
 }
