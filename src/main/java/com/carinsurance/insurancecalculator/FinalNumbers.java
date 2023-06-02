@@ -1,7 +1,6 @@
 package com.carinsurance.insurancecalculator;
 
-import com.carinsurance.car.Car;
-import com.carinsurance.client.Client;
+
 
 class FinalNumbers {
     public static final int LOWER_AGE_LIMIT = 26;
@@ -14,6 +13,7 @@ class FinalNumbers {
     public   static final double HIGHER_LIMIT_YEAR_OF_MANUFACTURE = 2010;
     public  static  final int LOWER_LIMIT_KM_PER_YEAR = 15000;
     public   static  final int MIDDLE_LIMIT_KM_PER_YEAR = 30000;
+    public static final  double MINIMAL_PRICE_FOR_INSURANCE = 300.0;
 
 
 }

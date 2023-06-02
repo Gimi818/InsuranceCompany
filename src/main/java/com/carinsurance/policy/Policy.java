@@ -1,4 +1,5 @@
 package com.carinsurance.policy;
+
 import javax.persistence.*;
 
 import lombok.*;
@@ -18,12 +19,12 @@ public class Policy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String policyName;
+    private String insuranceType;
 
-    private double  priceOfInsurance;
+    private double priceOfInsurance;
     private LocalDate startDate;
 
     private LocalDate endDate;
-
 
 
 }

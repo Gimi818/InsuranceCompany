@@ -1,6 +1,7 @@
 package com.carinsurance.car;
 
 import com.carinsurance.policy.Policy;
+
 import javax.persistence.*;
 
 import lombok.*;
@@ -21,7 +22,9 @@ public class Car {
     private String model;
     private int carValue;
     @Enumerated(EnumType.STRING)
-    private CarModel carmodel;
+    private CarModel carModel;
+    @Enumerated(EnumType.STRING)
+    ParkingType parkingType;
     private int yearOfManufacture;
     private double enginCapacity;
     private int averageKmTraveledPerYear;

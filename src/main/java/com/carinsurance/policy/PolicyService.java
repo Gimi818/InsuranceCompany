@@ -31,22 +31,42 @@ public class PolicyService {
     private final UniqueStringGenerator generator;
     private final CalculatePrice price;
 
-    public Policy savePolicy(Long clientId, Long carId) {
-        log.info("Creating new policy for client with ID {} and car with ID {}", clientId, carId);
+    public Policy saveACPolicy(Long clientId, Long carId) {
+        log.info("Creating new AC policy for client with ID {} and car with ID {}", clientId, carId);
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
 
         Policy newPolicy = Policy.builder()
                 .policyName(generator.generateUniqueString())
+                .insuranceType("AC")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(price.calculateFinalPrice(car, client))
+                .priceOfInsurance(price.calculateFinalPriceForOC(car, client))
                 .build();
         policyRepository.save(newPolicy);
-        log.info("Created new policy {}", newPolicy);
+        log.info("Created AC new policy {}", newPolicy);
         return newPolicy;
 
     }
+
+    public Policy saveACAndOCPolicy(Long clientId, Long carId) {
+        log.info("Creating new OC/AC policy for client with ID {} and car with ID {}", clientId, carId);
+        Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
+
+        Policy newPolicy = Policy.builder()
+                .policyName(generator.generateUniqueString())
+                .insuranceType("AC/OC")
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now().plusYears(1))
+                .priceOfInsurance(price.calculateFinalPriceForAcAndOc(car, client))
+                .build();
+        policyRepository.save(newPolicy);
+        log.info("Created new OC/AC policy {}", newPolicy);
+        return newPolicy;
+
+    }
+
 
     public PolicyResponseDto findPolicyById(Long id) {
         log.info("Finding policy with ID {}", id);

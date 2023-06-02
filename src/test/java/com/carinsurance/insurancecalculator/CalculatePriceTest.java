@@ -41,8 +41,8 @@ class CalculatePriceTest {
     @DisplayName("Should return insurance price 1426.0 zł for second car ")
     void calculate_final_price_for_first_car() {
         //given & when
-        when(calculatePoints.calculatePoints(car, client)).thenReturn(0.023);
-        double price = calculatePrice.calculateFinalPrice(car, client);
+        when(calculatePoints.calculatePointsForOC(car, client)).thenReturn(0.023);
+        double price = calculatePrice.calculateFinalPriceForOC(car, client);
         //then
         assertThat(price).isEqualTo(1426.0);
 
@@ -53,8 +53,8 @@ class CalculatePriceTest {
     void calculate_final_price_for_second_car() {
 
         //given & when
-        when(calculatePoints.calculatePoints(secondCar, client)).thenReturn(0.019);
-        double price = calculatePrice.calculateFinalPrice(secondCar, client);
+        when(calculatePoints.calculatePointsForOC(secondCar, client)).thenReturn(0.019);
+        double price = calculatePrice.calculateFinalPriceForOC(secondCar, client);
         //then
         assertThat(price).isEqualTo(855.0);
     }
@@ -65,8 +65,8 @@ class CalculatePriceTest {
     void calculate_minimal_price() {
 
         //given & when
-        when(calculatePoints.calculatePoints(secondCar, client)).thenReturn(0.0001);
-        double price = calculatePrice.calculateFinalPrice(secondCar, client);
+        when(calculatePoints.calculatePointsForOC(secondCar, client)).thenReturn(0.0001);
+        double price = calculatePrice.calculateFinalPriceForOC(secondCar, client);
         //then
         assertThat(price).isEqualTo(300);
     }

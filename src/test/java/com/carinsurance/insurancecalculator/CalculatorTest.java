@@ -19,7 +19,7 @@ class CalculatorTest {
     Car secondCar;
     @Mock
     CarModel carModel = CarModel.valueOf("CAR");
-    private final Calculator calculator = new Calculator();
+    private final CalculatorOC calculator = new CalculatorOC();
 
     @BeforeEach
     void setUp() {
@@ -122,7 +122,7 @@ class CalculatorTest {
     void points_for_type_of_vehicle_test() {
         //given
         CarModel lorry = CarModel.valueOf("LORRY");
-        car.setCarmodel(lorry);
+        car.setCarModel(lorry);
         //when
         double points = calculator.pointsForTypeOfVehicle(car);
         //then

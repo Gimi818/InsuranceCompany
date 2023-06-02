@@ -5,20 +5,18 @@ import com.carinsurance.car.CarRepository;
 import com.carinsurance.car.CarService;
 import com.carinsurance.client.Client;
 import com.carinsurance.client.ClientRepository;
-import com.carinsurance.insurancecalculator.Calculator;
+import com.carinsurance.insurancecalculator.CalculatorOC;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
 import com.carinsurance.policy.dto.PolicyRequestDto;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +36,7 @@ class PolicyServiceTest {
     @Mock
     private UniqueStringGenerator uniqueStringGenerator;
     @Mock
-    private Calculator calculator;
+    private CalculatorOC calculator;
 
     @InjectMocks
     private PolicyService policyService;

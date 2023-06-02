@@ -17,7 +17,7 @@ class CalculatePointsTest {
     private CalculatePoints calculatePoints;
 
     @Mock
-    private Calculator calculator;
+    private CalculatorOC calculator;
     @Mock
     Car car;
     @Mock
@@ -42,7 +42,7 @@ class CalculatePointsTest {
         when(calculator.pointsForAverageKMTraveledPerYear(car)).thenReturn(0.005);
         when(calculator.pointsForTypeOfVehicle(car)).thenReturn(0.005);
 
-        double actualPoints = calculatePoints.calculatePoints(car, client);
+        double actualPoints = calculatePoints.calculatePointsForOC(car, client);
 
         assertEquals(expectedPoints, actualPoints);
     }
@@ -58,7 +58,7 @@ class CalculatePointsTest {
         when(calculator.pointsForAverageKMTraveledPerYear(car)).thenReturn(0.005);
         when(calculator.pointsForTypeOfVehicle(car)).thenReturn(0.003);
 
-        double actualPoints = calculatePoints.calculatePoints(car, client);
+        double actualPoints = calculatePoints.calculatePointsForOC(car, client);
 
         assertEquals(expectedPoints, actualPoints);
     }
