@@ -5,20 +5,18 @@ import com.carinsurance.car.CarRepository;
 import com.carinsurance.car.CarService;
 import com.carinsurance.client.Client;
 import com.carinsurance.client.ClientRepository;
-import com.carinsurance.insurancecalculator.Calculator;
+import com.carinsurance.insurancecalculator.CalculatorOC;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
 import com.carinsurance.policy.dto.PolicyRequestDto;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +36,7 @@ class PolicyServiceTest {
     @Mock
     private UniqueStringGenerator uniqueStringGenerator;
     @Mock
-    private Calculator calculator;
+    private CalculatorOC calculator;
 
     @InjectMocks
     private PolicyService policyService;
@@ -52,9 +50,9 @@ class PolicyServiceTest {
 
     @BeforeEach
     void setUp() {
-        policyRequestDto = new PolicyRequestDto(1000, LocalDate.now(), LocalDate.now().plusYears(1));
-        policy = new Policy(1L, "SDNKS82QEW", 1000, LocalDate.now(), LocalDate.now().plusYears(1));
-        car = new Car(1L, "Bmw", "X5", 30000, null, 2010, 3.0, 21000, policy);
+        policyRequestDto = new PolicyRequestDto(1000,"AC", LocalDate.now(), LocalDate.now().plusYears(1));
+        policy = new Policy(1L, "SDNKS82QEW","AC", 1000, LocalDate.now(), LocalDate.now().plusYears(1));
+        car = new Car(1L, "Bmw", "X5", 30000, null,null, 2010, 3.0, 21000, policy);
         client = new Client(1L, "John", "New", 30, null);
     }
 

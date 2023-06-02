@@ -46,10 +46,10 @@ class CarControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, CarModel.CAR, 2010, 3.0, 21000);
+        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE,2010, 3.0, 21000);
 
         carRequestDtoJson = objectMapper.writeValueAsString(carRequestDto);
-        carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, 2010, 3.0, 21000, null);
+        carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE,2010, 3.0, 21000, null);
 
     }
 

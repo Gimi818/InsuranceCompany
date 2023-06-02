@@ -2,6 +2,7 @@ package com.carinsurance.policy;
 
 
 import com.carinsurance.car.CarModel;
+import com.carinsurance.car.ParkingType;
 import com.carinsurance.car.dto.CarResponseDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 import com.carinsurance.policy.dto.PolicyRequestDto;
@@ -58,15 +59,15 @@ public class PolicyControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
-        policyResponseDto = new PolicyResponseDto(1L, 1000, LocalDate.now(), LocalDate.now().plusYears(1));
-        policyRequestDto = new PolicyRequestDto(1000, LocalDate.now(), LocalDate.now().plusYears(1));
+        policyResponseDto = new PolicyResponseDto(1L, 1000,"AC", LocalDate.now(), LocalDate.now().plusYears(1));
+        policyRequestDto = new PolicyRequestDto(1000, "AC",LocalDate.now(), LocalDate.now().plusYears(1));
 
     }
 
     @Test
     void should_find_policy_by_id() throws Exception {
         given(policyService.findPolicyById(1L)).willReturn(policyResponseDto);
-        mockMvc.perform(get("/policies/1")
+        mockMvc.perform(get("/AC/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
@@ -78,13 +79,13 @@ public class PolicyControllerTest {
     @Test
     public void shouldSavePolicy() throws Exception {
         // given
-        carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, 2010, 3.0, 21000, null);
+        carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE, 2010, 3.0, 21000, null);
         clientResponseDto = new ClientResponseDto(1L, "John", "Smith", 30, null);
 
 
-        given(policyService.savePolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
+        given(policyService.saveACPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
 
-        mockMvc.perform(post("/policies/1/cars/1")
+        mockMvc.perform(post("/AC/1/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
