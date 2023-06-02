@@ -6,7 +6,7 @@ import com.carinsurance.client.Client;
 import com.carinsurance.car.Car;
 import com.carinsurance.client.ClientRepository;
 import com.carinsurance.client.exception.ClientNotFoundException;
-import com.carinsurance.insurancecalculator.Calculator;
+import com.carinsurance.insurancecalculator.CalculatePrice;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import com.carinsurance.policy.exception.PolicyNotFoundException;
@@ -26,9 +26,10 @@ public class PolicyService {
     private final PolicyRepository policyRepository;
     private final CarRepository carRepository;
     private final ClientRepository clientRepository;
-    private final Calculator calculator;
+
     private final PolicyMapper policyMapper;
     private final UniqueStringGenerator generator;
+    private final CalculatePrice price;
 
     public Policy savePolicy(Long clientId, Long carId) {
         log.info("Creating new policy for client with ID {} and car with ID {}", clientId, carId);
@@ -39,7 +40,7 @@ public class PolicyService {
                 .policyName(generator.generateUniqueString())
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(calculator.calculatePrice(car, client))
+                .priceOfInsurance(price.calculateFinalPrice(car, client))
                 .build();
         policyRepository.save(newPolicy);
         log.info("Created new policy {}", newPolicy);
