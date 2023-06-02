@@ -2,6 +2,7 @@ package com.carinsurance.insurancecalculator;
 
 import com.carinsurance.car.Car;
 import com.carinsurance.car.CarModel;
+import com.carinsurance.car.ParkingType;
 import com.carinsurance.client.Client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +11,8 @@ import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CalculatorTest {
+
+class CalculatorOCTest {
     @Mock
     Client client;
     Client secondClient;
@@ -18,7 +20,9 @@ class CalculatorTest {
     Car car;
     Car secondCar;
     @Mock
-    CarModel carModel = CarModel.valueOf("CAR");
+    CarModel carModel = CarModel.CAR;
+    ParkingType parkingType = ParkingType.GARAGE;
+    ParkingType parkingTypeRoad = ParkingType.ROAD;
     private final CalculatorOC calculator = new CalculatorOC();
 
     @BeforeEach
@@ -28,9 +32,9 @@ class CalculatorTest {
 
         secondClient = new Client(2L, "test", "test", 28, null);
 
-        car = new Car(1L, "BMW", "X5", 62000, carModel, 2016, 3.0, 16000, null);
+        car = new Car(1L, "BMW", "X5", 62000, carModel ,parkingType, 2016, 3.0, 16000, null);
 
-        secondCar = new Car(2L, "Audi", "A5", 45000, carModel, 2012, 1.8, 32000, null);
+        secondCar = new Car(2L, "Audi", "A5", 45000, carModel,parkingTypeRoad, 2012, 1.8, 32000, null);
     }
 
     @Test
@@ -74,7 +78,22 @@ class CalculatorTest {
         //then
         assertThat(points).isEqualTo(0.005);
     }
-
+    @Test
+    @DisplayName("Should return 0.001 points when type of parking is GARAGE")
+    void points_for_type_of_parking() {
+        //given & when
+        double points = calculator.pointsForParkingType(car);
+        //then
+        assertThat(points).isEqualTo(0.001);
+    }
+    @Test
+    @DisplayName("Should return 0.01 points when type of parking is ROAD")
+    void points_for_type_of_parking_() {
+        //given & when
+        double points = calculator.pointsForParkingType(secondCar);
+        //then
+        assertThat(points).isEqualTo(0.01);
+    }
     @Test
     @DisplayName("Should return 0.01 points when engin capacity is greater than 3.5")
     void points_for_large_engin_capacity() {
@@ -200,7 +219,6 @@ class CalculatorTest {
         //then
         assertThat(points).isEqualTo(0.001);
     }
-
 
 
 }

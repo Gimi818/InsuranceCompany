@@ -48,7 +48,7 @@ class ClientServiceTest {
     void setUp() {
         clientRequestDto = new ClientRequestDto("John", "New", 30, Collections.emptyList());
         client = new Client(1L, "John", "New", 30, new ArrayList<>());
-        car = new Car(1L, "test", "test", 0, null, 0, 0, 0, null);
+        car = new Car(1L, "test", "test", 0, null,null, 0, 0, 0, null);
 
     }
 

@@ -42,8 +42,8 @@ class CarServiceTest {
 
     @BeforeEach
     void setUp() {
-        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, null, 2010, 3.0, 21000);
-        car = new Car(1L, "Bmw", "X5", 30000, null, 2010, 3.0, 21000, null);
+        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, null, null,2010, 3.0, 21000);
+        car = new Car(1L, "Bmw", "X5", 30000, null,null, 2010, 3.0, 21000, null);
     }
 
     @Test
@@ -65,7 +65,7 @@ class CarServiceTest {
 
     @Test
     void should_assign_policy_to_car() {
-        Policy policy = new Policy(1L,"X83DSHA2",1000,LocalDate.now(),LocalDate.now().plusYears(1));
+        Policy policy = new Policy(1L,"X83DSHA2","OC",1000,LocalDate.now(),LocalDate.now().plusYears(1));
         given(carRepository.findById(1L)).willReturn(Optional.of(car));
         given(policyRepository.findById(1L)).willReturn(Optional.of(policy));
         given(carRepository.save(car)).willReturn(car);

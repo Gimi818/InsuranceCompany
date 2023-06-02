@@ -14,13 +14,13 @@ public class PolicyController {
     private final PolicyService policyService;
 
     @PostMapping("/{clientId}/cars/{carId}")
-    public ResponseEntity<Policy> savePolicy(@PathVariable Long clientId, @PathVariable Long carId) {
+    public ResponseEntity<Policy> saveAcInsurance(@PathVariable Long clientId, @PathVariable Long carId) {
 
         return new ResponseEntity<>(policyService.saveACPolicy(clientId, carId), HttpStatus.CREATED);
     }
 
     @PostMapping("/OC/{clientId}/cars/{carId}")
-    public ResponseEntity<Policy> savePolicy2(@PathVariable Long clientId, @PathVariable Long carId) {
+    public ResponseEntity<Policy> saveAcAndOcInsurance(@PathVariable Long clientId, @PathVariable Long carId) {
 
         return new ResponseEntity<>(policyService.saveACAndOCPolicy(clientId, carId), HttpStatus.CREATED);
     }
