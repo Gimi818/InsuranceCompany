@@ -1,20 +1,7 @@
 # Car Insurance
 ## Web application for calculating car insurance prices and creating policies.
 
-The application can be used by an insurance company to calculate insurance for customers and store their customer data.
-In the first step, the customer must register with the application in order to receive an authentication token,
-which will give the customer the ability to use the functions of the application.
-The next step is for the customer to enter his personal data and information about 
-the car , which are saved in a database.
-The application, using the data provided by the 
-client and calculates the price of his car insurance.
-The logic for calculating the insurance price uses data such as :
-client's age, engine capacity, vehicle type, vehicle price, year of production, average kilometres driven per year.
-In the next step, the application creates an individual policy assigned to the client and the car in request.
-The policy contains a unique name, policy start and end date and insurance price. 
-I used a Mysql database to implement the relationships in the database
-one customer can have multiple vehicles and one vehicle can have one insurance policy.
-The application has an implemented swagger.
+The application can be used by an insurance company to calculate OC and OC/AC insurance for customers. In the first step, the customer must register with the application in order to receive an authentication token, which will give the customer the ability to use the functions of the application. The next step is for the customer to enter his personal data and information about the car , which are saved in a database. The application, using the data provided by the client and calculates the price of his car insurance .In the application there is a choice of two types of insurance OC or OC and AC .The logic for calculating the insurance price uses data such as : client's age, engine capacity, vehicle type, garage type , vehicle price, year of production, average kilometres driven per year. In the next step, the application creates an individual policy assigned to the client and the car . The policy contains a unique name , type of policy, policy start and end date and insurance price. I used a Mysql database to implement the relationships in the database one customer can have multiple vehicles and one vehicle can have one insurance policy. The application has an implemented swagger.
 
 
  ## Application is developed using following technologies:
@@ -78,12 +65,16 @@ The application has an implemented swagger.
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/5.PNG" width="500" heigt="700"/>
   
+  
     Step 6 : 
-    POST localhost:8080/policies/1/cars/1
-    Calculate insurance prices and create policy
+    POST localhost:8080/OC/AC/1/cars/1
+    or
+    POST localhost:8080/OC/1/cars/1
+    Calculate OC and AC prices  or only OC price and created policy
     And add your token to the authorisation
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.2.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.1.PNG" width="500" heigt="700"/>
   
     Step 7 : 
     PUT localhost:8080/cars/1/policies/1
@@ -101,11 +92,11 @@ The application has an implemented swagger.
   
     Endpoints available in the application :
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endPoints.PNG" width="500" heigt="500"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endpoints.PNG" width="500" heigt="500"/>
  
  ## Tests in application: 
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests2.1.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests2.2.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests1.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/test2.PNG" width="500" heigt="700"/>
  
  
  
