@@ -17,9 +17,10 @@ The application can be used by an insurance company to calculate OC and OC/AC in
  <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="90" height="50"/></a> </p>
  
  ## To run the application, follow these steps:
-- Install Intellij IDEA and MySql on your computer.
-- Create date base in MySql and enter yours date base name and password in application.propertis
+- Install Intellij IDEA and Docker Desktop on your computer.
+- Run Docker Desktop
 - Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/CarInsurance.git
+- Run docker-compose in application
 - Run the applications in Intellij IDEA.
 - Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
 - Try the apllications in Postaman , the steps how to do it are below.
@@ -73,8 +74,8 @@ The application can be used by an insurance company to calculate OC and OC/AC in
     Calculate OC and AC prices  or only OC price and created policy
     And add your token to the authorisation
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.2.PNG" width="500" heigt="700"/>
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.1.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.0.1v1.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.0.2v2.PNG" width="500" heigt="700"/>
   
     Step 7 : 
     PUT localhost:8080/cars/1/policies/1
@@ -92,7 +93,7 @@ The application can be used by an insurance company to calculate OC and OC/AC in
   
     Endpoints available in the application :
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endpoints.PNG" width="500" heigt="500"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/allendpoints.PNG" width="500" heigt="500"/>
  
  ## Tests in application: 
  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests1.PNG" width="500" heigt="700"/>
