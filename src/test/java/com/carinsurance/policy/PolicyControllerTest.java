@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,8 +44,7 @@ public class PolicyControllerTest {
 
     private static Policy policy;
     private static PolicyResponseDto policyResponseDto;
-    private static String clientRequestDtoJson;
-    private static String policyRequestDtoJson;
+
     private static PolicyRequestDto policyRequestDto;
     private static CarResponseDto carResponseDto;
     private static ClientResponseDto clientResponseDto;
@@ -59,15 +56,15 @@ public class PolicyControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
-        policyResponseDto = new PolicyResponseDto(1L, 1000,"AC", LocalDate.now(), LocalDate.now().plusYears(1));
-        policyRequestDto = new PolicyRequestDto(1000, "AC",LocalDate.now(), LocalDate.now().plusYears(1));
+        policyResponseDto = new PolicyResponseDto(1L, 1000,"OC", LocalDate.now(), LocalDate.now().plusYears(1));
+        policyRequestDto = new PolicyRequestDto(1000, "OC",LocalDate.now(), LocalDate.now().plusYears(1));
 
     }
 
     @Test
     void should_find_policy_by_id() throws Exception {
         given(policyService.findPolicyById(1L)).willReturn(policyResponseDto);
-        mockMvc.perform(get("/AC/1")
+        mockMvc.perform(get("/OC/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
@@ -77,15 +74,30 @@ public class PolicyControllerTest {
     }
 
     @Test
-    public void shouldSavePolicy() throws Exception {
+    public void shouldSaveOCPolicy() throws Exception {
         // given
         carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE, 2010, 3.0, 21000, null);
         clientResponseDto = new ClientResponseDto(1L, "John", "Smith", 30, null);
 
 
-        given(policyService.saveACPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
+        given(policyService.saveOCPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
 
-        mockMvc.perform(post("/AC/1/cars/1")
+        mockMvc.perform(post("/OC/1/cars/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+
+    }
+    @Test
+    public void shouldSaveOCAndACPolicy() throws Exception {
+        // given
+        carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE, 2010, 3.0, 21000, null);
+        clientResponseDto = new ClientResponseDto(1L, "John", "Smith", 30, null);
+
+
+        given(policyService.saveACAndOCPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
+
+        mockMvc.perform(post("/OC/AC/1/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 

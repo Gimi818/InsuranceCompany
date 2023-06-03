@@ -31,20 +31,20 @@ public class PolicyService {
     private final UniqueStringGenerator generator;
     private final CalculatePrice price;
 
-    public Policy saveACPolicy(Long clientId, Long carId) {
-        log.info("Creating new AC policy for client with ID {} and car with ID {}", clientId, carId);
+    public Policy saveOCPolicy(Long clientId, Long carId) {
+        log.info("Creating new OC policy for client with ID {} and car with ID {}", clientId, carId);
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
 
         Policy newPolicy = Policy.builder()
                 .policyName(generator.generateUniqueString())
-                .insuranceType("AC")
+                .insuranceType("OC")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
                 .priceOfInsurance(price.calculateFinalPriceForOC(car, client))
                 .build();
         policyRepository.save(newPolicy);
-        log.info("Created AC new policy {}", newPolicy);
+        log.info("Created OC new policy {}", newPolicy);
         return newPolicy;
 
     }
