@@ -1,15 +1,15 @@
 
-version: '3'
+version: '3.8'
 services:
   mysqldb:
     image: mysql
     container_name: mysql-container
     environment:
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_USER: user
       MYSQL_DATABASE: carinsurance
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - 4444:3306
-
+      - 4440:3306
 
