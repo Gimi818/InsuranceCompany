@@ -20,7 +20,7 @@ The application can be used by an insurance company to calculate OC and OC/AC in
 - Install Intellij IDEA and Docker Desktop on your computer.
 - Run Docker Desktop
 - Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/CarInsurance.git
-- Run docker-compose in application
+- Run docker-compose up in terminal 
 - Run the applications in Intellij IDEA.
 - Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
 - Try the apllications in Postaman , the steps how to do it are below.
@@ -89,7 +89,7 @@ The application can be used by an insurance company to calculate OC and OC/AC in
     Get all your data
     And add your token to the authorisation
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8.0.1v2.PNG" width="500" heigt="700"/>
   
     Endpoints available in the application :
   
