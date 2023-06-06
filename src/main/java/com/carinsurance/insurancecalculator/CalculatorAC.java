@@ -49,7 +49,7 @@ public class CalculatorAC implements Calculator {
         } else if (car.getCarModel() == CarModel.LORRY) {
             return 0.03;
         }
-        throw new IllegalArgumentException("Vehicle type unknown: " + car.getCarModel());
+        throw  new UnknownParkingTypeException(car.getParkingType());
 
     }
 

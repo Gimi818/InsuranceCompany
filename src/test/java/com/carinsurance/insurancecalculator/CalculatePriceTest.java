@@ -38,35 +38,35 @@ class CalculatePriceTest {
     }
 
     @Test
-    @DisplayName("Should return AC price 1426.0 zł for second car ")
+    @DisplayName("Should return OC price 1426.0 zł for second car ")
     void calculate_final_price_for_first_car() {
         //given & when
         when(calculatePoints.calculatePointsForOC(car, client)).thenReturn(0.023);
-        double price = calculatePrice.calculateFinalPriceForOC(car, client);
+        double price = calculatePrice.calculateOcInsurancePrice(car, client);
         //then
         assertThat(price).isEqualTo(1426.0);
 
     }
 
     @Test
-    @DisplayName("Should return AC price 855.0 zł for car ")
+    @DisplayName("Should return OC price 855.0 zł for car ")
     void calculate_final_price_for_second_car() {
 
         //given & when
         when(calculatePoints.calculatePointsForOC(secondCar, client)).thenReturn(0.019);
-        double price = calculatePrice.calculateFinalPriceForOC(secondCar, client);
+        double price = calculatePrice.calculateOcInsurancePrice(secondCar, client);
         //then
         assertThat(price).isEqualTo(855.0);
     }
 
 
     @Test
-    @DisplayName("Should return AC price 300 zł  when price is less than 300 ")
+    @DisplayName("Should return OC price 300 zł  when price is less than 300 ")
     void calculate_minimal_price() {
 
         //given & when
         when(calculatePoints.calculatePointsForOC(secondCar, client)).thenReturn(0.0001);
-        double price = calculatePrice.calculateFinalPriceForOC(secondCar, client);
+        double price = calculatePrice.calculateOcInsurancePrice(secondCar, client);
         //then
         assertThat(price).isEqualTo(300);
     }
@@ -76,7 +76,7 @@ class CalculatePriceTest {
     void calculate_final_price_for_first_car2() {
         //given & when
         when(calculatePoints.calculatePointsForAC(car, client)).thenReturn(0.046);
-        double price = calculatePrice.calculateFinalPriceForAcAndOc(car, client);
+        double price = calculatePrice.calculateAcOcInsurancePrice(car, client);
         //then
         assertThat(price).isEqualTo(3152.0);
 

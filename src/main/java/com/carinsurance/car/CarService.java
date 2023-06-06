@@ -2,6 +2,7 @@ package com.carinsurance.car;
 
 import com.carinsurance.car.dto.CarRequestDto;
 import com.carinsurance.car.dto.CarResponseDto;
+import com.carinsurance.car.exception.CarHasAPolicyException;
 import com.carinsurance.car.exception.CarNotFoundException;
 import com.carinsurance.policy.Policy;
 import com.carinsurance.policy.PolicyRepository;
@@ -22,10 +23,10 @@ public class CarService {
     private final PolicyRepository policyRepository;
 
 
+
     public Car saveCar(CarRequestDto carRequestDto) {
         log.info("Saving car {}", carRequestDto);
         Car newCar = carRepository.save(carMapper.dtoToEntity(carRequestDto));
-
         log.info("Saved car {}", newCar);
         return newCar;
     }
@@ -46,6 +47,10 @@ public class CarService {
 
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
         Policy policy = policyRepository.findById(policyId).orElseThrow(() -> new PolicyNotFoundException(policyId));
+
+        if (car.getPolicy() != null) {
+            throw  new CarHasAPolicyException(carId);
+        }
         car.setPolicy(policy);
 
         log.info("Assigned policy with ID {} to car with ID {}", policyId, carId);

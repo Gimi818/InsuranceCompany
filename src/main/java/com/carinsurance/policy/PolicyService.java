@@ -41,7 +41,7 @@ public class PolicyService {
                 .insuranceType("OC")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(price.calculateFinalPriceForOC(car, client))
+                .priceOfInsurance(price.calculateOcInsurancePrice(car, client))
                 .build();
         policyRepository.save(newPolicy);
         log.info("Created OC new policy {}", newPolicy);
@@ -59,7 +59,7 @@ public class PolicyService {
                 .insuranceType("AC/OC")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(price.calculateFinalPriceForAcAndOc(car, client))
+                .priceOfInsurance(price.calculateAcOcInsurancePrice(car, client))
                 .build();
         policyRepository.save(newPolicy);
         log.info("Created new OC/AC policy {}", newPolicy);

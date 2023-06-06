@@ -24,7 +24,7 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarModel carModel;
     @Enumerated(EnumType.STRING)
-    ParkingType parkingType;
+    private ParkingType parkingType;
     private int yearOfManufacture;
     private double enginCapacity;
     private int averageKmTraveledPerYear;

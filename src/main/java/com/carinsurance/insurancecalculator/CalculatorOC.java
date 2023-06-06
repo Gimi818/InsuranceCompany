@@ -25,7 +25,6 @@ public class CalculatorOC implements Calculator {
         } else {
             return 0.02;
         }
-
     }
 
     @Override
@@ -64,7 +63,8 @@ public class CalculatorOC implements Calculator {
         } else if (car.getParkingType() == ParkingType.ROAD) {
             return 0.01;
         }
-        throw new IllegalArgumentException("Unknown parking type : " + car.getParkingType());
+        throw  new UnknownParkingTypeException(car.getParkingType());
+
     }
 
     @Override
@@ -92,6 +92,5 @@ public class CalculatorOC implements Calculator {
         }
 
     }
-
 
 }
