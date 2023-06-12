@@ -11,7 +11,6 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode
 public class User {
 
     @Id

@@ -1,9 +1,10 @@
-package com.carinsurance.insurancecalculator;
+package com.carinsurance.insurancecalculator.ac;
 
 import com.carinsurance.car.Car;
 import com.carinsurance.car.CarModel;
 import com.carinsurance.car.ParkingType;
 import com.carinsurance.client.Client;
+import com.carinsurance.insurancecalculator.Calculator;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -49,7 +50,7 @@ public class CalculatorAC implements Calculator {
         } else if (car.getCarModel() == CarModel.LORRY) {
             return 0.03;
         }
-        throw  new UnknownParkingTypeException(car.getParkingType());
+        throw new IllegalArgumentException("Unknown vehicle type : " + car.getCarModel());
 
     }
 

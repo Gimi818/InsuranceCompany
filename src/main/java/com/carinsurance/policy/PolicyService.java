@@ -6,7 +6,8 @@ import com.carinsurance.client.Client;
 import com.carinsurance.car.Car;
 import com.carinsurance.client.ClientRepository;
 import com.carinsurance.client.exception.ClientNotFoundException;
-import com.carinsurance.insurancecalculator.CalculatePrice;
+import com.carinsurance.insurancecalculator.acoc.CalculateAcOcPrice;
+import com.carinsurance.insurancecalculator.oc.CalculatePriceOC;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import com.carinsurance.policy.exception.PolicyNotFoundException;
@@ -29,7 +30,8 @@ public class PolicyService {
 
     private final PolicyMapper policyMapper;
     private final UniqueStringGenerator generator;
-    private final CalculatePrice price;
+    private final CalculatePriceOC price;
+    private final CalculateAcOcPrice calculatorAcOcPrice;
 
     public Policy saveOCPolicy(Long clientId, Long carId) {
         log.info("Creating new OC policy for client with ID {} and car with ID {}", clientId, carId);
@@ -59,7 +61,7 @@ public class PolicyService {
                 .insuranceType("AC/OC")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(price.calculateAcOcInsurancePrice(car, client))
+                .priceOfInsurance(calculatorAcOcPrice.finalAcOcInsurancePrice(client,car))
                 .build();
         policyRepository.save(newPolicy);
         log.info("Created new OC/AC policy {}", newPolicy);
