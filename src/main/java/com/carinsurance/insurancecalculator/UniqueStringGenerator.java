@@ -1,7 +1,7 @@
 package com.carinsurance.insurancecalculator;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 @AllArgsConstructor
-@Service
+@Component
 public class UniqueStringGenerator {
 
     public String generateUniqueString() {

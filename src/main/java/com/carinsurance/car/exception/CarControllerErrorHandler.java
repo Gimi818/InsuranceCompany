@@ -19,4 +19,18 @@ public class CarControllerErrorHandler {
         return new
                 CarErrorResponse(message, HttpStatus.NOT_FOUND);
     }
+
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(CarHasAPolicyException.class)
+    @ResponseBody
+    public CarErrorResponse carHasAPolicy(CarHasAPolicyException exception) {
+        final String message = exception.getMessage();
+        log.error(message);
+        return new
+                CarErrorResponse(message, HttpStatus.CONFLICT);
+    }
+
+
+
 }

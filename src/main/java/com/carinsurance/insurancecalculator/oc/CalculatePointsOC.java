@@ -1,4 +1,4 @@
-package com.carinsurance.insurancecalculator;
+package com.carinsurance.insurancecalculator.oc;
 
 import com.carinsurance.car.Car;
 import com.carinsurance.client.Client;
@@ -10,9 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 @Log4j2
-public class CalculatePoints {
+public class CalculatePointsOC {
     private final CalculatorOC calculatorOC;
-    private  final CalculatorAC calculatorAC;
 
     public double calculatePointsForOC(Car car, Client client) {
         log.info("Calculating OC points for car with ID {} and client with ID {}", car.getId(), client.getId());
@@ -25,19 +24,6 @@ public class CalculatePoints {
         log.info("Calculated OC points is: {}", points);
         return points;
     }
-
-    public double calculatePointsForAC(Car car, Client client) {
-        log.info("Calculating AC points for car with ID {} and client with ID {}", car.getId(), client.getId());
-        double points = calculatorAC.pointsForClientAge(client)
-                + calculatorAC.pointsForVehicleAge(car)
-                + calculatorAC.pointsForEnginCapacity(car)
-                + calculatorAC.pointsForParkingType(car)
-                + calculatorAC.pointsForAverageKMTraveledPerYear(car)
-                + calculatorAC.pointsForTypeOfVehicle(car);
-        log.info("Calculated AC points is: {}", points);
-        return points;
-    }
-
 
 
 }
