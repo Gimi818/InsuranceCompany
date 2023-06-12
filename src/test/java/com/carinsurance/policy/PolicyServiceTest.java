@@ -5,7 +5,7 @@ import com.carinsurance.car.CarRepository;
 import com.carinsurance.car.CarService;
 import com.carinsurance.client.Client;
 import com.carinsurance.client.ClientRepository;
-import com.carinsurance.insurancecalculator.CalculatorOC;
+import com.carinsurance.insurancecalculator.oc.CalculatorOC;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
 import com.carinsurance.policy.dto.PolicyRequestDto;
 import com.carinsurance.policy.dto.PolicyResponseDto;
@@ -62,7 +62,6 @@ class PolicyServiceTest {
         given(policyRepository.findById(1L)).willReturn(Optional.of(policy));
         given(policyMapper.entityToDto(policy))
                 .willReturn(policyResponseDto);
-
         assertThat(policyService.findPolicyById(1L)).isEqualTo(policyResponseDto);
     }
 

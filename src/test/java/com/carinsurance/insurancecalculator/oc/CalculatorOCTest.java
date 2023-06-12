@@ -1,18 +1,19 @@
-package com.carinsurance.insurancecalculator;
+package com.carinsurance.insurancecalculator.oc;
 
 import com.carinsurance.car.Car;
 import com.carinsurance.car.CarModel;
 import com.carinsurance.car.ParkingType;
 import com.carinsurance.client.Client;
+import com.carinsurance.insurancecalculator.oc.CalculatorOC;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorACTest {
+
+class CalculatorOCTest {
     @Mock
     Client client;
     Client secondClient;
@@ -23,7 +24,7 @@ class CalculatorACTest {
     CarModel carModel = CarModel.CAR;
     ParkingType parkingType = ParkingType.GARAGE;
     ParkingType parkingTypeRoad = ParkingType.ROAD;
-    private final CalculatorAC calculator = new CalculatorAC();
+    private final CalculatorOC calculator = new CalculatorOC();
 
     @BeforeEach
     void setUp() {
@@ -38,24 +39,24 @@ class CalculatorACTest {
     }
 
     @Test
-    @DisplayName("Should return 0.02 points when age is less than lower age limit (26)")
+    @DisplayName("Should return 0.035 points when age is less than lower age limit (26)")
     void points_for_client_age() {
 
         //given && when
         double points = calculator.pointsForClientAge(client);
         //then
-        assertThat(points).isEqualTo(0.02);
+        assertThat(points).isEqualTo(0.035);
     }
 
 
     @Test
-    @DisplayName("Should return 0.003 points when age  is in the range 26 - 65")
+    @DisplayName("Should return 0.001 points when age  is in the range 26 - 65")
     void points_for_second_client_age() {
 
         //given && when
         double points = calculator.pointsForClientAge(secondClient);
         //then
-        assertThat(points).isEqualTo(0.003);
+        assertThat(points).isEqualTo(0.001);
     }
 
     @Test
@@ -71,43 +72,58 @@ class CalculatorACTest {
 
 
     @Test
-    @DisplayName("Should return 0.007 points when engin capacity is in the range 2.5 - 3.5")
+    @DisplayName("Should return 0.005 points when engin capacity is in the range 2.5 - 3.5")
     void points_for_engin_capacity() {
         //given & when
         double points = calculator.pointsForEnginCapacity(car);
         //then
-        assertThat(points).isEqualTo(0.007);
+        assertThat(points).isEqualTo(0.005);
     }
-
     @Test
-    @DisplayName("Should return 0.012 points when engin capacity is greater than 3.5")
+    @DisplayName("Should return 0.001 points when type of parking is GARAGE")
+    void points_for_type_of_parking() {
+        //given & when
+        double points = calculator.pointsForParkingType(car);
+        //then
+        assertThat(points).isEqualTo(0.001);
+    }
+    @Test
+    @DisplayName("Should return 0.01 points when type of parking is ROAD")
+    void points_for_type_of_parking_() {
+        //given & when
+        double points = calculator.pointsForParkingType(secondCar);
+        //then
+        assertThat(points).isEqualTo(0.01);
+    }
+    @Test
+    @DisplayName("Should return 0.01 points when engin capacity is greater than 3.5")
     void points_for_large_engin_capacity() {
         //given
         car.setEnginCapacity(5.0);
         //when
         double points = calculator.pointsForEnginCapacity(car);
         //then
-        assertThat(points).isEqualTo(0.012);
+        assertThat(points).isEqualTo(0.01);
     }
 
     @Test
-    @DisplayName("Should return 0.02 points when engin capacity is less than 1.6")
+    @DisplayName("Should return 0.01 points when engin capacity is less than 1.6")
     void points_for_low_engin_capacity() {
         //given
         car.setEnginCapacity(1.2);
         //when
         double points = calculator.pointsForEnginCapacity(car);
         //then
-        assertThat(points).isEqualTo(0.002);
+        assertThat(points).isEqualTo(0.001);
     }
 
     @Test
-    @DisplayName("Should return 0.005 potins when engin capacity is in the range 1.6 - 2.5 ")
+    @DisplayName("Should return 0.003 potins when engin capacity is in the range 1.6 - 2.5 ")
     void points_for_second_engin_capacity() {
         //given & when
         double points = calculator.pointsForEnginCapacity(secondCar);
         //then
-        assertThat(points).isEqualTo(0.005);
+        assertThat(points).isEqualTo(0.003);
     }
 
 
@@ -120,22 +136,7 @@ class CalculatorACTest {
         assertThat(points).isEqualTo(0.001);
     }
 
-    @Test
-    @DisplayName("Should return 0.005 points when type of parking is GARAGE")
-    void points_for_type_of_parking() {
-        //given & when
-        double points = calculator.pointsForParkingType(car);
-        //then
-        assertThat(points).isEqualTo(0.005);
-    }
-    @Test
-    @DisplayName("Should return 0.02 points when type of parking is ROAD")
-    void points_for_type_of_parking_() {
-        //given & when
-        double points = calculator.pointsForParkingType(secondCar);
-        //then
-        assertThat(points).isEqualTo(0.02);
-    }
+
     @Test
     @DisplayName("Should return 0.01 points when type of vehicle is LORRY")
     void points_for_type_of_vehicle_test() {
@@ -149,22 +150,22 @@ class CalculatorACTest {
     }
 
     @Test
-    @DisplayName("Should return 0.01points when vehicle age is in the range 2015 - 2020")
+    @DisplayName("Should return 0.003 points when vehicle age is in the range 2015 - 2020")
     void points_for_vehicle_age() {
         //given & when
         double points = calculator.pointsForVehicleAge(car);
         //then
-        assertThat(points).isEqualTo(0.01);
+        assertThat(points).isEqualTo(0.003);
     }
 
 
     @Test
-    @DisplayName("Should return 0.009 points when vehicle age is in the range 2010 - 2015")
+    @DisplayName("Should return 0.005 points when vehicle age is in the range 2010 - 2015")
     void points_for_second_vehicle_age() {
         //given & when
         double points = calculator.pointsForVehicleAge(secondCar);
         //then
-        assertThat(points).isEqualTo(0.009);
+        assertThat(points).isEqualTo(0.005);
     }
 
     @Test
@@ -191,33 +192,33 @@ class CalculatorACTest {
 
 
     @Test
-    @DisplayName("Should return 0.006 points when average number of kilometres travelled per year is in the range 15000km - 30000km  ")
+    @DisplayName("Should return 0.002 points when average number of kilometres travelled per year is in the range 15000km - 30000km  ")
     void points_for_average_KM_traveled_per_year() {
         //given & when
         double points = calculator.pointsForAverageKMTraveledPerYear(car);
         //then
-        assertThat(points).isEqualTo(0.006);
+        assertThat(points).isEqualTo(0.002);
     }
 
 
     @Test
-    @DisplayName("Should return 0.001 points when the average number of kilometres travelled per year is greater than 30000km  ")
+    @DisplayName("Should return 0.006 points when the average number of kilometres travelled per year is greater than 30000km  ")
     void points_for_average_KM_traveled_per_year_2() {
         //given & when
         double points = calculator.pointsForAverageKMTraveledPerYear(secondCar);
         //then
-        assertThat(points).isEqualTo(0.001);
+        assertThat(points).isEqualTo(0.006);
     }
 
     @Test
-    @DisplayName("Should return 0.003 points when average number of kilometres travelled per year is less  that 15000km ")
+    @DisplayName("Should return 0.001 points when average number of kilometres travelled per year is less  that 15000km ")
     void points_for_low_average_KM_traveled_per_year() {
         //given
         car.setAverageKmTraveledPerYear(5000);
         //when
         double points = calculator.pointsForAverageKMTraveledPerYear(car);
         //then
-        assertThat(points).isEqualTo(0.003);
+        assertThat(points).isEqualTo(0.001);
     }
 
 
