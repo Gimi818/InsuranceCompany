@@ -35,7 +35,7 @@ I used a My SQL database to implement the relationships in the database one cust
 - Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
 - Try the apllications in Postaman , the steps how to do it are below.
  
- ## How to use apllication in postman
+ ## How to use apllication in postman :
  
     Step 1 :
     POST localhost:8080/register 
@@ -125,9 +125,9 @@ I used a My SQL database to implement the relationships in the database one cust
    <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/allendpoints.PNG" width="500" heigt="500"/>
  
  ## Tests in application: 
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/tests1.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/test2.PNG" width="500" heigt="700"/>
- 
- 
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests1.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests2.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests3.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests4.PNG" width="500" heigt="700"/>
  
 
