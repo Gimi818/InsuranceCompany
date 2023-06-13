@@ -76,6 +76,9 @@ I used a My SQL database to implement the relationships in the database one cust
     POST localhost:8080/cars/add
     Enter vehicle details
     And add your token to the authorisation
+    Available options for:
+    carModel: CAR , LORRY.
+    parkingType: GARAGE , DRIVEWAY , ROAD.
     JSON:
      {"brand": "Bmw",
      "model": "X5",
@@ -85,7 +88,7 @@ I used a My SQL database to implement the relationships in the database one cust
      "yearOfManufacture": 2015,
      "enginCapacity": 3.0,
      "averageKmTraveledPerYear": 19500}
-  
+      
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/4.PNG" width="500" heigt="700"/>
   
     Step 5 : 
