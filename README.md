@@ -1,7 +1,17 @@
 # Car Insurance
-## Web application for calculating car insurance prices and creating policies.
+The application can be used by an insurance company to calculate and create OC and OC/AC insurance for customers.
 
-The application can be used by an insurance company to calculate OC and OC/AC insurance for customers. In the first step, the customer must register with the application in order to receive an authentication token, which will give the customer the ability to use the functions of the application. The next step is for the customer to enter his personal data and information about the car , which are saved in a database. The application, using the data provided by the client and calculates the price of his car insurance .In the application there is a choice of two types of insurance OC or OC and AC .The logic for calculating the insurance price uses data such as : client's age, engine capacity, vehicle type, garage type , vehicle price, year of production, average kilometres driven per year. In the next step, the application creates an individual policy assigned to the client and the car . The policy contains a unique name , type of policy, policy start and end date and insurance price. I used a Mysql database to implement the relationships in the database one customer can have multiple vehicles and one vehicle can have one insurance policy. The application has an implemented swagger.
+In the first step, the customer must register with the application in order to receive an authentication token, which will give the customer the ability to use the functions of the application. 
+
+The next step is for the customer to enter his personal data and information about the car, which are saved in a database. The application, using the data provided by the client and calculates the price of his car insurance. 
+
+In the application, there is a choice of two types of insurance OC or OC and AC. The logic for calculating the insurance price uses data such as : client's age, engine capacity, vehicle type,  garage type, vehicle price, year of production and average kilometers driven per year.
+
+The client receives a 5% discount on third-party liability insurance (OC) and a 2% discount on comprehensive insurance (AC) for insuring an additional vehicle. The maximum discount for OC insurance is 40% and 25% for AC insurance. 
+
+In the next step, the application creates an individual policy assigned to the client and the car. The policy has a unique name, type of policy, policy start and end date and insurance price. 
+
+I used a My SQL database to implement the relationships in the database one customer can have multiple vehicles and one vehicle can have one insurance policy. The application is deployed on Docker and has an implemented swagger.
 
 
  ## Application is developed using following technologies:
@@ -29,13 +39,19 @@ The application can be used by an insurance company to calculate OC and OC/AC in
  
     Step 1 :
     POST localhost:8080/register 
-    Enter your username and password. 
+    Enter your username and password.
+    JSON:
+    {"username":"User",
+    "password":"Password"}
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/1.PNG" width="500" heigt="700"/>
   
     Step 2 :
     POST localhost:8080/token
     Enter username and password to get token.
+    JSON:
+    {"username":"User",
+    "password":"Password"}
     
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/2.PNG" width="500" heigt="700"/>
   
@@ -48,7 +64,11 @@ The application can be used by an insurance company to calculate OC and OC/AC in
     Step 3.2 :
     POST localhost:8080/clients/add
     Enter personal data 
-    And add your token to the authorisation
+    And add your token to the authorisation.
+    JSON:
+    { "firstname": "John",
+     "lastname": "Williams",
+     "age": 35}
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3.2.PNG" width="500" heigt="700"/>
   
@@ -56,6 +76,15 @@ The application can be used by an insurance company to calculate OC and OC/AC in
     POST localhost:8080/cars/add
     Enter vehicle details
     And add your token to the authorisation
+    JSON:
+     {"brand": "Bmw",
+     "model": "X5",
+     "carValue": 75000,
+     "carModel": "CAR",
+     "parkingType": "GARAGE",
+     "yearOfManufacture": 2015,
+     "enginCapacity": 3.0,
+     "averageKmTraveledPerYear": 19500}
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/4.PNG" width="500" heigt="700"/>
   
