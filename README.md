@@ -1,3 +1,4 @@
+
 # Car Insurance
 The application can be used by an insurance company to calculate and create OC and OC/AC insurance for customers.
 
@@ -27,15 +28,14 @@ I used a My SQL database to implement the relationships in the database one cust
  <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="90" height="50"/></a> </p>
  
  ## To run the application, follow these steps:
-- Install Intellij IDEA and Docker Desktop on your computer.
+- Install IntelliJ IDEA and Docker Desktop on your computer.
 - Run Docker Desktop
-- Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/CarInsurance.git
-- Run docker-compose up in terminal 
-- Run the applications in Intellij IDEA.
-- Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
-- Try the apllications in Postaman , the steps how to do it are below.
+- Clone the repository in IntelliJ IDEA using the link https://github.com/Gimi818/CarInsurance.git
+- Run docker-compose up in the terminal 
+- Run the applications in IntelliJ IDEA.
+- Try the applications in Postaman, the steps on how to do it are below.
  
- ## How to use apllication in postman :
+ ## How to use application in postman :
  
     Step 1 :
     POST localhost:8080/register 
@@ -48,7 +48,7 @@ I used a My SQL database to implement the relationships in the database one cust
   
     Step 2 :
     POST localhost:8080/token
-    Enter username and password to get token.
+    Enter your username and password to get the token.
     JSON:
     {"username":"User",
     "password":"Password"}
@@ -64,7 +64,7 @@ I used a My SQL database to implement the relationships in the database one cust
     Step 3.2 :
     POST localhost:8080/clients/add
     Enter personal data 
-    And add your token to the authorisation.
+    And add your token to the authorization.
     JSON:
     { "firstname": "John",
      "lastname": "Williams",
@@ -75,10 +75,10 @@ I used a My SQL database to implement the relationships in the database one cust
     Step 4 : 
     POST localhost:8080/cars/add
     Enter vehicle details
-    And add your token to the authorisation
+    And add your token to the authorization
     Available options for:
-    carModel: CAR , LORRY.
-    parkingType: GARAGE , DRIVEWAY , ROAD.
+    carModel: CAR, LORRY.
+    parkingType: GARAGE, DRIVEWAY, ROAD.
     JSON:
      {"brand": "Bmw",
      "model": "X5",
@@ -94,43 +94,44 @@ I used a My SQL database to implement the relationships in the database one cust
     Step 5 : 
     PUT localhost:8080/clients/1/cars/1
     Assign the car to the client by id
-    And add your token to the authorisation
+    And add your token to the authorization
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/5.PNG" width="500" heigt="700"/>
   
   
     Step 6 : 
-    POST localhost:8080/OC/AC/1/cars/1
+    POST localhost:8080/policy/OC/AC/1/cars/1
     or
-    POST localhost:8080/OC/1/cars/1
-    Calculate OC and AC prices  or only OC price and created policy
-    And add your token to the authorisation
+    POST localhost:8080/policy/OC/1/cars/1
+   
+    Choose policy: OC or OC and AC and create an individual policy.
+    And add your token to the authorization
   
    <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.0.1v1.PNG" width="500" heigt="700"/>
    <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.0.2v2.PNG" width="500" heigt="700"/>
   
     Step 7 : 
     PUT localhost:8080/cars/1/policies/1
-    Assing the policy to the car by id
-    And add your token to the authorisation
+    Assign the policy to the car by id
+    And add your token to the authorization
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/7.PNG" width="500" heigt="700"/>
   
     Step 8 : 
     GET localhost:8080/clients/1
     Get all your data
-    And add your token to the authorisation
+    And add your token to the authorization
   
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8.0.1v2.PNG" width="500" heigt="700"/>
   
     Endpoints available in the application :
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/allendpoints.PNG" width="500" heigt="500"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endpointsN.PNG" width="500" heigt="500"/>
  
  ## Tests in application: 
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests1.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests2.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests3.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/newtests4.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/testsCoverage.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/TestsN1.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/TestsN2.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/TestsN3.PNG" width="500" heigt="700"/>
  
-
+ 
