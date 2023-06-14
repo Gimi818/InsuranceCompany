@@ -2,6 +2,7 @@ package com.carinsurance.policy;
 
 import javax.persistence.*;
 
+import com.carinsurance.car.CarModel;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,7 +20,9 @@ public class Policy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String policyName;
-    private String insuranceType;
+
+    @Enumerated(EnumType.STRING)
+    private PolicyType policyType;
 
     private double priceOfInsurance;
     private LocalDate startDate;

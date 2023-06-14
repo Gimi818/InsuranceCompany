@@ -1,4 +1,3 @@
-
 version: '3.8'
 services:
   mysqldb:
@@ -12,4 +11,8 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - 4440:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
 
+volumes:
+  mysql-data:

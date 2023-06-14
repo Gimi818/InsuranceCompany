@@ -1,5 +1,9 @@
 package com.carinsurance.insurancecalculator;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FinalNumbers {
     public static final int LOWER_AGE_LIMIT = 26;
     public static final int MIDDLE_AGE_LIMIT = 65;
@@ -14,7 +18,7 @@ public class FinalNumbers {
     public static final double MINIMAL_PRICE_FOR_INSURANCE = 300.0;
     public static final double MAX_OC_DISCOUNT = 0.60;
     public static final double MAX_AC_DISCOUNT = 0.75;
-    public static final double OC_DISCOUNT_FOR_THE_NEXT_CAR = 0.05;
-    public static final double AC_DISCOUNT_FOR_THE_NEXT_CAR = 0.02;
+    public static final double OC_DISCOUNT = 0.05;
+    public static final double AC_DISCOUNT = 0.02;
 
 }

@@ -2,15 +2,16 @@ package com.carinsurance.insurancecalculator.oc;
 
 import com.carinsurance.client.Client;
 import org.springframework.stereotype.Component;
+
 import static com.carinsurance.insurancecalculator.FinalNumbers.*;
+
 @Component
 public class CalculateDiscountOC {
 
-
     public double calculateDiscountForOC(Client client) {
-        int amountOfCars = client.getCars().size();
-        if (amountOfCars > 1) {
-            return 1 - (amountOfCars - 1) * OC_DISCOUNT_FOR_THE_NEXT_CAR;
+        int carsListSize = client.getCars().size();
+        if (carsListSize > 1) {
+            return 1 - (carsListSize - 1) * OC_DISCOUNT;
         } else {
             return 1;
         }
