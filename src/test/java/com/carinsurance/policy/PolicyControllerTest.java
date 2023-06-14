@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -40,13 +41,17 @@ public class PolicyControllerTest {
     private PolicyService policyService;
     @Autowired
     private WebApplicationContext context;
+    @Mock
     private MockMvc mockMvc;
-
+    @Mock
     private static Policy policy;
+    @Mock
     private static PolicyResponseDto policyResponseDto;
-
+    @Mock
     private static PolicyRequestDto policyRequestDto;
+    @Mock
     private static CarResponseDto carResponseDto;
+    @Mock
     private static ClientResponseDto clientResponseDto;
 
 
@@ -64,7 +69,7 @@ public class PolicyControllerTest {
     @Test
     void should_find_policy_by_id() throws Exception {
         given(policyService.findPolicyById(1L)).willReturn(policyResponseDto);
-        mockMvc.perform(get("/OC/1")
+        mockMvc.perform(get("/policy/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
@@ -74,7 +79,7 @@ public class PolicyControllerTest {
     }
 
     @Test
-    public void shouldSaveOCPolicy() throws Exception {
+    public void should_save_OC_policy() throws Exception {
         // given
         carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE, 2010, 3.0, 21000, null);
         clientResponseDto = new ClientResponseDto(1L, "John", "Smith", 30, null);
@@ -82,7 +87,7 @@ public class PolicyControllerTest {
 
         given(policyService.saveOCPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
 
-        mockMvc.perform(post("/OC/1/cars/1")
+        mockMvc.perform(post("/policy/OC/1/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
@@ -97,7 +102,7 @@ public class PolicyControllerTest {
 
         given(policyService.saveACAndOCPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
 
-        mockMvc.perform(post("/OC/AC/1/cars/1")
+        mockMvc.perform(post("/policy/OC/AC/1/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 

@@ -1,13 +1,10 @@
 package com.carinsurance.policy;
 
 import com.carinsurance.car.Car;
-import com.carinsurance.car.CarRepository;
-import com.carinsurance.car.CarService;
 import com.carinsurance.client.Client;
-import com.carinsurance.client.ClientRepository;
-import com.carinsurance.insurancecalculator.oc.CalculatorOC;
+import com.carinsurance.insurancecalculator.acoc.CalculateFinalAcOcPriceService;
+import com.carinsurance.insurancecalculator.oc.CalculateFinalOCPriceService;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
-import com.carinsurance.policy.dto.PolicyRequestDto;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,55 +27,77 @@ class PolicyServiceTest {
     @Mock
     private PolicyMapper policyMapper;
     @Mock
-    private CarRepository carRepository;
+    private UniqueStringGenerator stringGenerator;
     @Mock
-    private ClientRepository clientRepository;
+    private CalculateFinalOCPriceService finalOcPrice;
     @Mock
-    private UniqueStringGenerator uniqueStringGenerator;
-    @Mock
-    private CalculatorOC calculator;
-
+    private CalculateFinalAcOcPriceService finalOcAcPrice;
     @InjectMocks
-    private PolicyService policyService;
-    private CarService carService;
-    private PolicyRequestDto policyRequestDto;
+    private PolicyService service;
+    @Mock
     private PolicyResponseDto policyResponseDto;
-
+    @Mock
     private Policy policy;
+    @Mock
     private Client client;
+    @Mock
     private Car car;
+
 
     @BeforeEach
     void setUp() {
-        policyRequestDto = new PolicyRequestDto(1000,"AC", LocalDate.now(), LocalDate.now().plusYears(1));
-        policy = new Policy(1L, "SDNKS82QEW","AC", 1000, LocalDate.now(), LocalDate.now().plusYears(1));
-        car = new Car(1L, "Bmw", "X5", 30000, null,null, 2010, 3.0, 21000, policy);
-        client = new Client(1L, "John", "New", 30, null);
+        policy = new Policy(1L, "SDNKS82QEW", null, 2000, LocalDate.now(), LocalDate.now().plusYears(1));
+        car = new Car();
+        client = new Client();
     }
 
 
     @Test
-    void find_Policy_By_Id() {
+    void Should_Find_Policy_By_Id() {
         given(policyRepository.findById(1L)).willReturn(Optional.of(policy));
         given(policyMapper.entityToDto(policy))
                 .willReturn(policyResponseDto);
-        assertThat(policyService.findPolicyById(1L)).isEqualTo(policyResponseDto);
+        assertThat(service.findPolicyById(1L)).isEqualTo(policyResponseDto);
     }
 
-//    @Test
-//    void should_assign_policy_to_car() {
-//        given(clientRepository.findById(client.getId())).willReturn(Optional.of(client));
-//        given(carRepository.findById(car.getId())).willReturn(Optional.of(car));
-//        given(uniqueStringGenerator.generateUniqueString()).willReturn("SDNKS82QEW");
-//        given(calculator.calculatePrice(car, client)).willReturn(1000.0);
-//        Policy policy1 = policyService.savePolicy(client.getId(), car.getId());
-//
-//        assertThat(policy).isNotNull();
-//        assertThat(policy.getPolicyName()).isEqualTo("SDNKS82QEW");
-//        assertThat(policy.getStartDate()).isEqualTo(LocalDate.now());
-//        assertThat(policy.getEndDate()).isEqualTo(LocalDate.now().plusYears(1));
-//        assertThat(policy.getPriceOfInsurance()).isEqualTo(1000.0);
-//
-//        assertThat(policy1).isEqualTo(policy);
-//    }
+    @Test
+    void should_save_oc_policy() {
+        //Given
+        car.setId(1L);
+        client.setId(1L);
+        LocalDate currentDate = LocalDate.now();
+        given(stringGenerator.generateUniqueString()).willReturn("SDNKS82QEW");
+        given(finalOcPrice.calculateOcInsurancePrice(1L, 1L)).willReturn(2000.0);
+        //When
+        Policy newPolicy = service.saveOCPolicy(client.getId(), car.getId());
+        //Then
+        assertThat(newPolicy).isNotNull();
+        assertThat(newPolicy.getPolicyName()).isEqualTo(policy.getPolicyName());
+        assertThat(newPolicy.getStartDate()).isEqualTo(currentDate);
+        assertThat(newPolicy.getEndDate()).isEqualTo(currentDate.plusYears(1));
+        assertThat(newPolicy.getPriceOfInsurance()).isEqualTo(2000.0);
+
+    }
+
+    @Test
+    void should_save_oc_ac_policy() {
+        //Given
+        car.setId(1L);
+        client.setId(1L);
+        LocalDate currentDate = LocalDate.now();
+        given(stringGenerator.generateUniqueString()).willReturn("SDNKS82QEW");
+        given(finalOcAcPrice.finalAcOcInsurancePrice(1L, 1L)).willReturn(2000.0);
+        //When
+        Policy newPolicy = service.saveACAndOCPolicy(client.getId(), car.getId());
+        //Then
+        assertThat(newPolicy).isNotNull();
+        assertThat(newPolicy.getPolicyName()).isEqualTo(policy.getPolicyName());
+        assertThat(newPolicy.getStartDate()).isEqualTo(currentDate);
+        assertThat(newPolicy.getEndDate()).isEqualTo(currentDate.plusYears(1));
+        assertThat(newPolicy.getPriceOfInsurance()).isEqualTo(2000.0);
+
+    }
 }
+
+
+

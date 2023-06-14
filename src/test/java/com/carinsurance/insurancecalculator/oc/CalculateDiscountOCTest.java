@@ -68,7 +68,7 @@ class CalculateDiscountOCTest {
         double result = calculateDiscountOC.finalDiscountForOC(discount);
 
         // Then
-        assertThat(expectedDiscount).isEqualTo(result);
+        assertThat(result).isEqualTo(expectedDiscount);
 
     }
 
@@ -83,7 +83,7 @@ class CalculateDiscountOCTest {
         double result = calculateDiscountOC.finalDiscountForOC(discount);
 
         // Then
-        assertThat(expectedDiscount).isEqualTo(result);
+        assertThat(result).isEqualTo(expectedDiscount);
 
     }
 
@@ -96,7 +96,7 @@ class CalculateDiscountOCTest {
         // When
         double result = calculateDiscountOC.finalDiscountForOC(discount);
         // Then
-        assertThat(expectedDiscount).isEqualTo(result);
+        assertThat(result).isEqualTo(expectedDiscount);
 
     }
 }

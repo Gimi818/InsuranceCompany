@@ -5,8 +5,11 @@ import com.carinsurance.car.CarRepository;
 import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 
+import com.carinsurance.client.exception.ClientNotFoundException;
+import com.carinsurance.policy.Policy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -16,11 +19,17 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+
 import java.util.*;
 
 
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.ExpectedCount.times;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -35,12 +44,17 @@ class ClientServiceTest {
 
     @InjectMocks
     private ClientService service;
-
+    @Mock
     private ClientRequestDto clientRequestDto;
+    @Mock
     private ClientResponseDto clientResponseDto;
+    @Mock
     private ClientResponseDto secondClientResponseDto;
+    @Mock
     private Client client;
+    @Mock
     private Client secondClient;
+    @Mock
     private Car car;
 
 
@@ -93,32 +107,45 @@ class ClientServiceTest {
 
     @Test
     void should_return_empty_list_when_no_clients() {
-
         // given
         given(clientRepository.findAllClients()).willReturn(Collections.emptyList());
-
         // when
         List<ClientResponseDto> actualClientsDtoList = service.findAllClient();
-
         // then
         Assertions.assertThat(actualClientsDtoList).isEmpty();
     }
 
-//    @Test
-//    void should_assign_car_to_client() {
-//        // given
-//        client = new Client(1L, "John", "New", 30, null);
-//        car = new Car(1L, "test", "test", 0, null, 0, 0, 0, null);
-//
-//        BDDMockito.given(clientRepository.findById(client.getId())).willReturn(Optional.of(client));
-//        BDDMockito.given(carRepository.findById(car.getId())).willReturn(Optional.of(car));
-//        // when
-//        Client result = service.assignCarToClient(client.getId(), car.getId());
-//        // then
-//        assertThat(result).isNotNull();
-//        assertThat(result.getCars()).hasSize(1);
-//
-//        BDDMockito.verify(clientRepository, BDDMockito.times(1)).save(client);
-//    }
+    @Test
+    @DisplayName("Should throw ClientNotFoundException when client is not found")
+    void should_throw_ClientNotFoundException() {
+        // Given
+        Long clientId = 1L;
+        //when
+        when(clientRepository.findById(clientId)).thenReturn(Optional.empty());
+        //Then
+        assertThrows(ClientNotFoundException.class, () -> service.findClientById(clientId));
+    }
+
+    @Test
+    void should_assign_car_to_client() {
+        // Given
+        Long clientId = 1L;
+        Long carId = 2L;
+        Client client = new Client();
+        Car car = new Car();
+        //When
+        when(clientRepository.findById(clientId)).thenReturn(Optional.of(client));
+        when(carRepository.findById(carId)).thenReturn(Optional.of(car));
+        when(clientRepository.save(client)).thenReturn(client);
+
+        Client result = service.assignCarToClient(clientId, carId);
+
+        // Then
+        assertTrue(result.getCars().contains(car));
+        assertThat(result).isNotNull();
+        assertThat(result.getCars()).hasSize(1);
+
+    }
 
 }
+

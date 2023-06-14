@@ -21,7 +21,9 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -35,20 +37,24 @@ class CarServiceTest {
 
     @InjectMocks
     private CarService carService;
+    @Mock
     private CarRequestDto carRequestDto;
+    @Mock
     private CarResponseDto carResponseDto;
+    @Mock
     private Car car;
+    @Mock
     private Policy policy;
 
     @BeforeEach
     void setUp() {
-        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, null, null,2010, 3.0, 21000);
-        car = new Car(1L, "Bmw", "X5", 30000, null,null, 2010, 3.0, 21000, null);
+        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, null, null, 2010, 3.0, 21000);
+        car = new Car(1L, "Bmw", "X5", 30000, null, null, 2010, 3.0, 21000, null);
     }
 
     @Test
     void should_save_car() {
-       given(carRepository.save(carMapper.dtoToEntity(carRequestDto)))
+        given(carRepository.save(carMapper.dtoToEntity(carRequestDto)))
                 .willReturn(car);
         assertThat(carService.saveCar(carRequestDto))
                 .isEqualTo(car);
@@ -65,7 +71,7 @@ class CarServiceTest {
 
     @Test
     void should_assign_policy_to_car() {
-        Policy policy = new Policy(1L,"X83DSHA2","OC",1000,LocalDate.now(),LocalDate.now().plusYears(1));
+        Policy policy = new Policy(1L, "X83DSHA2", null, 1000, LocalDate.now(), LocalDate.now().plusYears(1));
         given(carRepository.findById(1L)).willReturn(Optional.of(car));
         given(policyRepository.findById(1L)).willReturn(Optional.of(policy));
         given(carRepository.save(car)).willReturn(car);
@@ -95,6 +101,7 @@ class CarServiceTest {
         assertThat(throwable).isInstanceOf(CarNotFoundException.class);
         BDDMockito.verify(carRepository, Mockito.times(1)).findById(nonExistingCarId);
     }
+
     @Test
     @DisplayName("Should throw a policy not found exception when passing a non-existent policy id to add a policy to the car")
     void should_throw_policy_not_found_exception() {
@@ -111,5 +118,16 @@ class CarServiceTest {
         assertThat(throwable).isInstanceOf(PolicyNotFoundException.class);
         BDDMockito.verify(carRepository, Mockito.times(1)).findById(1L);
         BDDMockito.verify(policyRepository, Mockito.times(1)).findById(nonExistingPolicyId);
+    }
+
+    @Test
+    @DisplayName("Should throw CarNotFoundException when client is not found")
+    void should_throw_CarNotFoundException() {
+        // Given
+        Long carId = 1L;
+        //when
+        when(carRepository.findById(carId)).thenReturn(Optional.empty());
+        //Then
+        assertThrows(CarNotFoundException.class, () -> carService.findCarById(carId));
     }
 }
