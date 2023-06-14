@@ -23,6 +23,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingExcept
 import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.SerializationFeature;
+
 import java.util.*;
 
 import static org.mockito.BDDMockito.given;
@@ -30,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest("WebEnvironment.RANDOM_PORT")
 @WithMockUser
 class ClientControllerTest {
@@ -62,7 +64,7 @@ class ClientControllerTest {
 
     @WithMockUser
     @Test
-    void saveClient() throws Exception {
+    void save_client() throws Exception {
         given(clientService.saveClient(clientRequestDto)).willReturn(client);
 
         mockMvc.perform(post("/clients/add")

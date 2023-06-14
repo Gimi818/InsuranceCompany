@@ -10,27 +10,27 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Component
 @Log4j2
-public class CalculatePriceAC {
+public class CalculateBasicPriceAC {
 
     private final CalculatePointsAC calculatePoints;
     private final CalculateDiscountAC discounts;
-    private final PriceFormatter priceFormatter;
+    private final PriceFormatter formatter;
 
 
     public double calculateAcInsurancePrice(Car car, Client client) {
         log.info("Calculating  AC price for car with ID {} and client with ID {}", car.getId(), client.getId());
-        double finalAcPrice = acPriceWithDiscount(basicAcInsurancePrice(car, client), client);
+        double finalAcPrice = priceWithDiscount(basicInsurancePrice(car, client), client);
         log.info("Calculated AC price is: {}", finalAcPrice);
-        return priceFormatter.formatPrice(finalAcPrice);
+        return formatter.formatPrice(finalAcPrice);
 
     }
 
-    public double basicAcInsurancePrice(Car car, Client client) {
+    public double basicInsurancePrice(Car car, Client client) {
         return calculatePoints.calculatePointsForAC(car, client) * car.getCarValue();
     }
 
 
-    public double acPriceWithDiscount(double price, Client client) {
+    public double priceWithDiscount(double price, Client client) {
         return price * discounts.finalDiscountForAC(discounts.calculateDiscountForAC(client));
     }
 }

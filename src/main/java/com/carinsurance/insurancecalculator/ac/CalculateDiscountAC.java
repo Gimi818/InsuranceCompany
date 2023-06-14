@@ -7,9 +7,9 @@ import static com.carinsurance.insurancecalculator.FinalNumbers.*;
 public class CalculateDiscountAC {
 
     public double calculateDiscountForAC(Client client) {
-        int amountOfCars = client.getCars().size();
-        if (amountOfCars > 1) {
-            return 1 - (amountOfCars - 1) * AC_DISCOUNT_FOR_THE_NEXT_CAR;
+        int carsListSize = client.getCars().size();
+        if (carsListSize > 1) {
+            return 1 - (carsListSize - 1) * AC_DISCOUNT;
         } else {
             return 1;
         }

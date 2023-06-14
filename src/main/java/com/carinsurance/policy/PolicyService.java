@@ -1,13 +1,7 @@
 package com.carinsurance.policy;
 
-import com.carinsurance.car.CarRepository;
-import com.carinsurance.car.exception.CarNotFoundException;
-import com.carinsurance.client.Client;
-import com.carinsurance.car.Car;
-import com.carinsurance.client.ClientRepository;
-import com.carinsurance.client.exception.ClientNotFoundException;
-import com.carinsurance.insurancecalculator.acoc.CalculateAcOcPrice;
-import com.carinsurance.insurancecalculator.oc.CalculatePriceOC;
+import com.carinsurance.insurancecalculator.acoc.CalculateFinalAcOcPriceService;
+import com.carinsurance.insurancecalculator.oc.CalculateFinalOCPriceService;
 import com.carinsurance.insurancecalculator.UniqueStringGenerator;
 import com.carinsurance.policy.dto.PolicyResponseDto;
 import com.carinsurance.policy.exception.PolicyNotFoundException;
@@ -25,43 +19,35 @@ import java.time.LocalDate;
 public class PolicyService {
 
     private final PolicyRepository policyRepository;
-    private final CarRepository carRepository;
-    private final ClientRepository clientRepository;
-
     private final PolicyMapper policyMapper;
     private final UniqueStringGenerator generator;
-    private final CalculatePriceOC price;
-    private final CalculateAcOcPrice calculatorAcOcPrice;
+    private final CalculateFinalOCPriceService price;
+    private final CalculateFinalAcOcPriceService calculateFinalPrice;
+
 
     public Policy saveOCPolicy(Long clientId, Long carId) {
         log.info("Creating new OC policy for client with ID {} and car with ID {}", clientId, carId);
-        Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
-        Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
-
         Policy newPolicy = Policy.builder()
                 .policyName(generator.generateUniqueString())
-                .insuranceType("OC")
+                .policyType(PolicyType.OC)
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(price.calculateOcInsurancePrice(car, client))
+                .priceOfInsurance(price.calculateOcInsurancePrice(clientId, carId))
                 .build();
         policyRepository.save(newPolicy);
         log.info("Created OC new policy {}", newPolicy);
         return newPolicy;
-
     }
 
     public Policy saveACAndOCPolicy(Long clientId, Long carId) {
         log.info("Creating new OC/AC policy for client with ID {} and car with ID {}", clientId, carId);
-        Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(carId));
-        Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
 
         Policy newPolicy = Policy.builder()
                 .policyName(generator.generateUniqueString())
-                .insuranceType("AC/OC")
+                .policyType(PolicyType.OCAC)
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusYears(1))
-                .priceOfInsurance(calculatorAcOcPrice.finalAcOcInsurancePrice(client,car))
+                .priceOfInsurance(calculateFinalPrice.finalAcOcInsurancePrice(clientId, carId))
                 .build();
         policyRepository.save(newPolicy);
         log.info("Created new OC/AC policy {}", newPolicy);

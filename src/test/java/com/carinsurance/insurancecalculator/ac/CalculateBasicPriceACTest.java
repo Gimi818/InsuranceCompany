@@ -14,9 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
-class CalculatePriceACTest {
-
-    CalculatePriceAC calculatePrice;
+class CalculateBasicPriceACTest {
+    CalculateBasicPriceAC calculatePrice;
     @Mock
     PriceFormatter priceFormatter;
     @Mock
@@ -31,7 +30,7 @@ class CalculatePriceACTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-       calculatePrice = new CalculatePriceAC(calculatePoints, discounts, priceFormatter);
+        calculatePrice = new CalculateBasicPriceAC(calculatePoints, discounts, priceFormatter);
         client = new Client();
         car = new Car();
 

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 class CalculatePointsOCTest {
@@ -42,8 +43,8 @@ class CalculatePointsOCTest {
         when(calculatorOC.pointsForTypeOfVehicle(car)).thenReturn(0.005);
 
         double actualPoints = calculatePoints.calculatePointsForOC(car, client);
+        assertThat(actualPoints).isEqualTo(expectedPoints);
 
-        assertEquals(expectedPoints, actualPoints);
     }
 
     @Test
@@ -60,6 +61,6 @@ class CalculatePointsOCTest {
 
         double actualPoints = calculatePoints.calculatePointsForOC(car, client);
 
-        assertEquals(expectedPoints, actualPoints);
+        assertThat(actualPoints).isEqualTo(expectedPoints);
     }
 }

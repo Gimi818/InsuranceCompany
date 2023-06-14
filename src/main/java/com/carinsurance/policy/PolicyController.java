@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/OC")
+@RequestMapping("/policy")
 public class PolicyController {
     private final PolicyService policyService;
 
-    @PostMapping("/{clientId}/cars/{carId}")
+    @PostMapping("/OC/{clientId}/cars/{carId}")
     public ResponseEntity<Policy> saveAcInsurance(@PathVariable Long clientId, @PathVariable Long carId) {
 
         return new ResponseEntity<>(policyService.saveOCPolicy(clientId, carId), HttpStatus.CREATED);
     }
 
-    @PostMapping("/AC/{clientId}/cars/{carId}")
+    @PostMapping("/OC/AC/{clientId}/cars/{carId}")
     public ResponseEntity<Policy> saveAcAndOcInsurance(@PathVariable Long clientId, @PathVariable Long carId) {
 
         return new ResponseEntity<>(policyService.saveACAndOCPolicy(clientId, carId), HttpStatus.CREATED);

@@ -36,6 +36,7 @@ class CarControllerTest {
     @Autowired
     private WebApplicationContext context;
     private MockMvc mockMvc;
+
     private static CarRequestDto carRequestDto;
     private static String carRequestDtoJson;
     private static Car car;

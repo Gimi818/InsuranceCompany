@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CalculatePointsACTest {
 
@@ -42,7 +43,7 @@ class CalculatePointsACTest {
 
         double actualPoints = calculatePoints.calculatePointsForAC(car, client);
 
-        assertEquals(expectedPoints, actualPoints);
+        assertThat(actualPoints).isEqualTo(expectedPoints);
     }
 
     @Test
@@ -58,7 +59,7 @@ class CalculatePointsACTest {
         when(calculatorAC.pointsForTypeOfVehicle(car)).thenReturn(0.003);
 
         double actualPoints = calculatePoints.calculatePointsForAC(car, client);
+        assertThat(actualPoints).isEqualTo(expectedPoints);
 
-        assertEquals(expectedPoints, actualPoints);
     }
 }
