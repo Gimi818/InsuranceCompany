@@ -1,5 +1,5 @@
 
-# Car Insurance
+# Insurance Company
 The application can be used by an insurance company to calculate and create OC and OC/AC insurance for customers.
 
 In the first step, the customer must register with the application in order to receive an authentication token, which will give the customer the ability to use the functions of the application. 
@@ -44,7 +44,7 @@ I used a My SQL database to implement the relationships in the database one cust
     {"username":"User",
     "password":"Password"}
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/1.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/1N.PNG" width="500" heigt="700"/>
   
     Step 2 :
     POST localhost:8080/token
@@ -53,76 +53,70 @@ I used a My SQL database to implement the relationships in the database one cust
     {"username":"User",
     "password":"Password"}
     
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/2.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/2N.PNG" width="500" heigt="700"/>
   
     Step 3.1 : 
     Select the authorization field and select the Bearer token option 
-    and paste the token you received
+    and paste the token you received into the all next steps.
     
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3.1.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3N.PNG" width="500" heigt="700"/>
   
     Step 3.2 :
     POST localhost:8080/clients/add
-    Enter personal data 
-    And add your token to the authorization.
+    Enter personal data. 
     JSON:
     { "firstname": "John",
      "lastname": "Williams",
      "age": 35}
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3.2.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/4N.PNG" width="500" heigt="700"/>
   
     Step 4 : 
     POST localhost:8080/cars/add
-    Enter vehicle details
-    And add your token to the authorization
+    Enter vehicle details.
     Available options for:
     carModel: CAR, LORRY.
     parkingType: GARAGE, DRIVEWAY, ROAD.
     JSON:
      {"brand": "Bmw",
      "model": "X5",
-     "carValue": 75000,
+     "carValue": 83500,
      "carModel": "CAR",
      "parkingType": "GARAGE",
-     "yearOfManufacture": 2015,
+     "yearOfManufacture": 2016,
      "enginCapacity": 3.0,
      "averageKmTraveledPerYear": 19500}
       
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/4.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/5N.PNG" width="500" heigt="700"/>
   
     Step 5 : 
     PUT localhost:8080/clients/1/cars/1
-    Assign the car to the client by id
-    And add your token to the authorization
+    Assign the car to the client.
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/5.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6N.PNG" width="500" heigt="700"/>
   
   
     Step 6 : 
-    POST localhost:8080/policy/OC/AC/1/cars/1
+    POST localhost:8080/policies/OC/AC/1/cars/1
     or
-    POST localhost:8080/policy/OC/1/cars/1
+    POST localhost:8080/policies/OC/1/cars/1
    
     Choose policy: OC or OC and AC and create an individual policy.
-    And add your token to the authorization
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.0.1v1.PNG" width="500" heigt="700"/>
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6.0.2v2.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/7N.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8N.PNG" width="500" heigt="700"/>
   
     Step 7 : 
     PUT localhost:8080/cars/1/policies/1
-    Assign the policy to the car by id
-    And add your token to the authorization
+    Assign the policy to the car.
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/7.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/9N.PNG" width="500" heigt="700"/>
   
     Step 8 : 
     GET localhost:8080/clients/1
-    Get all your data
-    And add your token to the authorization
+    Get the result.
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8.0.1v2.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/10N.PNG" width="500" heigt="700"/>
   
     Endpoints available in the application :
   
