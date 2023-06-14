@@ -27,11 +27,11 @@ I used a My SQL database to implement the relationships in the database one cust
  </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://junit.org/junit4/images/junit5-banner.png" alt="java" width="90" height="50"/>
  <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="90" height="50"/></a> </p>
  
- ## To run the application, follow these steps:
+ ## To run the application, follow these steps :
 - Install IntelliJ IDEA and Docker Desktop on your computer.
-- Run Docker Desktop
-- Clone the repository in IntelliJ IDEA using the link https://github.com/Gimi818/CarInsurance.git
-- Run docker-compose up in the terminal 
+- Run Docker Desktop.
+- Clone the repository in IntelliJ IDEA using the link https://github.com/Gimi818/InsuranceCompany
+- Run docker-compose up in the terminal. 
 - Run the applications in IntelliJ IDEA.
 - Try the applications in Postaman, the steps on how to do it are below.
  
