@@ -69,7 +69,7 @@ public class PolicyControllerTest {
     @Test
     void should_find_policy_by_id() throws Exception {
         given(policyService.findPolicyById(1L)).willReturn(policyResponseDto);
-        mockMvc.perform(get("/policy/1")
+        mockMvc.perform(get("/policies/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
@@ -87,7 +87,7 @@ public class PolicyControllerTest {
 
         given(policyService.saveOCPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
 
-        mockMvc.perform(post("/policy/OC/1/cars/1")
+        mockMvc.perform(post("/policies/OC/1/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
@@ -102,7 +102,7 @@ public class PolicyControllerTest {
 
         given(policyService.saveACAndOCPolicy(clientResponseDto.id(), carResponseDto.id())).willReturn(policy);
 
-        mockMvc.perform(post("/policy/OC/AC/1/cars/1")
+        mockMvc.perform(post("/policies/OC/AC/1/cars/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
