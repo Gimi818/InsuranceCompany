@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/policy")
+@RequestMapping("/policies")
 public class PolicyController {
     private final PolicyService policyService;
 
