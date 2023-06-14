@@ -4,13 +4,13 @@ The application can be used by an insurance company to calculate and create OC a
 
 In the first step, the customer must register with the application in order to receive an authentication token, which will give the customer the ability to use the functions of the application. 
 
-The next step is for the customer to enter his personal data and information about the car, which are saved in a database. The application, using the data provided by the client and calculates the price of his car insurance. 
+The next step is for the client to enter his personal data and information about the vehicle. The application, using the data provided by the client and calculates the price of vehicle insurance. 
 
-In the application, there is a choice of two types of insurance OC or OC and AC. The logic for calculating the insurance price uses data such as : client's age, engine capacity, vehicle type,  garage type, vehicle price, year of production and average kilometers driven per year.
+We have two types of insurance to choose from: OC or OC and AC. The algorithms for calculating the insurance price uses data such as : client's age, engine capacity, vehicle type,  garage type, vehicle price, year of production and average kilometers driven per year.
 
 The client receives a 5% discount on third-party liability insurance (OC) and a 2% discount on comprehensive insurance (AC) for insuring an additional vehicle. The maximum discount for OC insurance is 40% and 25% for AC insurance. 
 
-In the next step, the application creates an individual policy assigned to the client and the car. The policy has a unique name, type of policy, policy start and end date and insurance price. 
+In the next step, the application creates an individual policy for the client and assigned it to the car. The policy has a unique name, type of policy, policy start and end date and insurance price. 
 
 I used a My SQL database to implement the relationships in the database one customer can have multiple vehicles and one vehicle can have one insurance policy. The application is deployed on Docker and has an implemented swagger.
 
