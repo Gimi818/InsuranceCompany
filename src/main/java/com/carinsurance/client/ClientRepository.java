@@ -7,6 +7,5 @@ import java.util.*;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    @Query("Select distinct c From Client c left join fetch c.cars")
-    List<Client> findAllClients();
+
 }

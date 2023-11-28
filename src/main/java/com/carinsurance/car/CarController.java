@@ -24,7 +24,7 @@ public class CarController {
 
 
     static final class Routes {
-        static final String ROOT = "/cars";
+        static final String ROOT = "/cars/{clientId}";
 
 
     }
