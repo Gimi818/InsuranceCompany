@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.carinsurance.loginandregister.RegisterController.Routes.*;
+
 @RestController
 @AllArgsConstructor
 public class RegisterController {
@@ -19,12 +21,18 @@ public class RegisterController {
     private final PasswordEncoder bCryptPasswordEncoder;
 
 
-    @PostMapping("/register")
+    @PostMapping(REGISTRATION)
     public ResponseEntity<RegistrationUserResponseDto> register(@RequestBody RegisterUserRequestDto registerUserRequestDto) {
         String encodedPassword = bCryptPasswordEncoder.encode(registerUserRequestDto.password());
         RegistrationUserResponseDto registerResult = loginService.register(
                 new RegisterUserRequestDto(registerUserRequestDto.username(), encodedPassword));
         return ResponseEntity.status(HttpStatus.CREATED).body(registerResult);
+    }
+
+    static final class Routes {
+        static final String REGISTRATION = "/register";
+
+
     }
 
 }
