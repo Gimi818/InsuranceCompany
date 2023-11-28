@@ -2,6 +2,7 @@ package com.carinsurance.loginandregister;
 
 import javax.persistence.*;
 
+import com.carinsurance.common.entity.AbstractEntity;
 import lombok.*;
 
 @Entity
@@ -11,11 +12,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends AbstractEntity {
     private String username;
     private String password;
 }

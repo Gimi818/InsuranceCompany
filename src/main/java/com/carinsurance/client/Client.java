@@ -4,6 +4,7 @@ import com.carinsurance.car.Car;
 
 import javax.persistence.*;
 
+import com.carinsurance.common.entity.AbstractEntity;
 import lombok.*;
 
 import java.util.*;
@@ -14,11 +15,8 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Client {
+public class Client  extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String firstname;
     private String lastname;
     private int age;

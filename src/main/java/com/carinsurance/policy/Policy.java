@@ -2,7 +2,7 @@ package com.carinsurance.policy;
 
 import javax.persistence.*;
 
-import com.carinsurance.car.CarModel;
+import com.carinsurance.common.entity.AbstractEntity;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,11 +14,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class Policy {
+public class Policy extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String policyName;
 
     @Enumerated(EnumType.STRING)
