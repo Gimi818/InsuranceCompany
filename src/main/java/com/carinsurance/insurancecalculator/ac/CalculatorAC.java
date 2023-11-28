@@ -1,8 +1,8 @@
 package com.carinsurance.insurancecalculator.ac;
 
 import com.carinsurance.car.Car;
-import com.carinsurance.car.CarModel;
-import com.carinsurance.car.ParkingType;
+import com.carinsurance.car.enums.CarModel;
+import com.carinsurance.car.enums.ParkingType;
 import com.carinsurance.client.Client;
 import com.carinsurance.insurancecalculator.Calculator;
 import lombok.AllArgsConstructor;

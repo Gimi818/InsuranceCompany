@@ -18,7 +18,6 @@ public class CalculateBasicPriceAC {
 
 
     public double calculateAcInsurancePrice(Car car, Client client) {
-        log.info("Calculating  AC price for car with ID {} and client with ID {}", car.getId(), client.getId());
         double finalAcPrice = priceWithDiscount(basicInsurancePrice(car, client), client);
         log.info("Calculated AC price is: {}", finalAcPrice);
         return formatter.formatPrice(finalAcPrice);

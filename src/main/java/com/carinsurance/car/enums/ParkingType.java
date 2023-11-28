@@ -1,4 +1,4 @@
-package com.carinsurance.car;
+package com.carinsurance.car.enums;
 
 public enum ParkingType {
 
