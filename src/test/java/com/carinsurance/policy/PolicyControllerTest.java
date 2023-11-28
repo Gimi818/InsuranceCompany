@@ -1,8 +1,8 @@
 package com.carinsurance.policy;
 
 
-import com.carinsurance.car.CarModel;
-import com.carinsurance.car.ParkingType;
+import com.carinsurance.car.enums.CarModel;
+import com.carinsurance.car.enums.ParkingType;
 import com.carinsurance.car.dto.CarResponseDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 import com.carinsurance.policy.dto.PolicyRequestDto;

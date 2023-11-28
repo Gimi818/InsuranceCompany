@@ -7,36 +7,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import static com.carinsurance.client.ClientController.Routes.*;
+
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/clients")
 public class ClientController {
 
     private final ClientService clientService;
 
 
-    @PostMapping("/add")
+    @PostMapping(ROOT)
     public ResponseEntity<Client> saveClient(@RequestBody ClientRequestDto clientRequestDto) {
         return new ResponseEntity<>(clientService.saveClient(clientRequestDto), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ClientResponseDto>> findAllClients() {
-        List<ClientResponseDto> allClients = clientService.findAllClient();
-        return ResponseEntity.status(HttpStatus.OK).body(allClients);
-    }
-
-    @GetMapping("/{id}")
+    @GetMapping(FIND_CLIENT_BY_ID)
     public ResponseEntity<ClientResponseDto> findClientById(@PathVariable Long id) {
         ClientResponseDto clientResponseDto = clientService.findClientById(id);
         return ResponseEntity.status(HttpStatus.OK).body(clientResponseDto);
     }
 
-    @PutMapping("/{clientId}/cars/{carId}")
-    public ResponseEntity<Void> addClientToCar(@PathVariable Long clientId, @PathVariable Long carId) {
-        clientService.assignCarToClient(clientId, carId);
-        return ResponseEntity.ok().build();
+    static final class Routes {
+        static final String ROOT = "/clients";
+        static final String FIND_CLIENT_BY_ID = ROOT + "/{id}";
+
+
     }
+
 }

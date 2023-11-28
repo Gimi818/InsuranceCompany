@@ -4,6 +4,8 @@ import com.carinsurance.car.dto.CarRequestDto;
 import com.carinsurance.car.dto.CarResponseDto;
 
 
+import com.carinsurance.car.enums.CarModel;
+import com.carinsurance.car.enums.ParkingType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
