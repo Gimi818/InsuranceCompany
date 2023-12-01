@@ -1,4 +1,4 @@
-package com.carinsurance.insurancecalculator.calculator;
+package com.carinsurance.insurancecalculator.calculator.points;
 
 import com.carinsurance.car.Car;
 import com.carinsurance.car.enums.CarModel;
@@ -14,7 +14,7 @@ import static com.carinsurance.insurancecalculator.FinalNumbers.*;
 @Component
 @AllArgsConstructor
 @Log4j2
-public class CalculatorOC implements Calculator {
+public class OcPoints implements Calculator {
 
     @Override
     public double pointsForClientAge(Client client) {
