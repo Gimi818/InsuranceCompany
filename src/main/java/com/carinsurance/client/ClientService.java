@@ -3,11 +3,12 @@ package com.carinsurance.client;
 import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
 
+import com.carinsurance.client.dto.CreatedClientDto;
 import com.carinsurance.common.exception.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 
 import lombok.extern.log4j.Log4j2;
-
+ import static com.carinsurance.client.ClientService.ErrorMessages.*;
 import org.springframework.stereotype.Service;
 
 
@@ -21,11 +22,10 @@ public class ClientService implements ClientFacade {
     private final ClientMapper clientMapper;
 
 
-    public Client saveClient(ClientRequestDto clientRequestDto) {
-        log.info("Saving client {}", clientRequestDto);
+    public CreatedClientDto saveClient(ClientRequestDto clientRequestDto) {
         Client client = clientRepository.save(clientMapper.dtoToEntity(clientRequestDto));
-        log.info("Saved client {}", client);
-        return client;
+        log.info("Saved client {} {}", client.getFirstname() , client.getLastname());
+        return clientMapper.createdEntityToDto(client);
     }
 
     public Client saveClientWithAddedCar(Client client) {
@@ -34,17 +34,20 @@ public class ClientService implements ClientFacade {
     }
 
     public Client findById(Long id) {
-        log.info("Finding client with ID {}", id);
-        Client client = clientRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        log.info("Found client {}", client);
-        return client;
+        return clientRepository.findById(id).orElseThrow(() -> new NotFoundException(CLIENT_NOT_FOUND));
     }
 
     public ClientResponseDto findClientById(Long id) {
-        log.info("Finding client with ID {}", id);
-        Client client = clientRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        log.info("Found client {}", client);
+        Client client = clientRepository.findById(id).orElseThrow(() -> new NotFoundException(CLIENT_NOT_FOUND));
+        log.info("Found client with Id {}", id);
         return clientMapper.entityToDto(client);
+    }
+
+
+    static final class ErrorMessages {
+
+        static final String CLIENT_NOT_FOUND = "Client with id %d not found";
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.carinsurance.client;
 
 import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
+import com.carinsurance.client.dto.CreatedClientDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ClientController {
 
 
     @PostMapping(ROOT)
-    public ResponseEntity<Client> saveClient(@RequestBody ClientRequestDto clientRequestDto) {
+    public ResponseEntity<CreatedClientDto> saveClient(@RequestBody ClientRequestDto clientRequestDto) {
         return new ResponseEntity<>(clientService.saveClient(clientRequestDto), HttpStatus.CREATED);
     }
 

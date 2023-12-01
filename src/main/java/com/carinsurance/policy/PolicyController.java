@@ -1,6 +1,7 @@
 package com.carinsurance.policy;
 
 
+import com.carinsurance.policy.dto.PolicyResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +15,13 @@ public class PolicyController {
     private final PolicyService policyService;
 
     @PostMapping(OC)
-    public ResponseEntity<Policy> saveAcInsurance(@PathVariable Long clientId) {
+    public ResponseEntity<PolicyResponseDto> saveAcInsurance(@PathVariable Long clientId) {
 
         return new ResponseEntity<>(policyService.saveOCPolicy(clientId), HttpStatus.CREATED);
     }
 
     @PostMapping(OCAC)
-    public ResponseEntity<Policy> saveAcAndOcInsurance(@PathVariable Long clientId) {
+    public ResponseEntity<PolicyResponseDto> saveAcAndOcInsurance(@PathVariable Long clientId) {
 
         return new ResponseEntity<>(policyService.saveACAndOCPolicy(clientId), HttpStatus.CREATED);
     }

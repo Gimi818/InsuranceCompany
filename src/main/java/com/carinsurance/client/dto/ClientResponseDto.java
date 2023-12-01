@@ -4,5 +4,5 @@ import com.carinsurance.car.Car;
 
 import java.util.*;
 
-public record ClientResponseDto(Long id, String firstname, String lastname, int age, List<Car> cars) {
+public record ClientResponseDto(String firstname, String lastname, int age, List<Car> cars) {
 }

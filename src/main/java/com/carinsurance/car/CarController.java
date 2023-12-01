@@ -2,6 +2,7 @@ package com.carinsurance.car;
 
 import com.carinsurance.car.dto.CarRequestDto;
 
+import com.carinsurance.car.dto.CreatedCarDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping(ROOT)
-    public ResponseEntity<Car> saveCar(@RequestBody CarRequestDto car, @PathVariable Long clientId) {
+    public ResponseEntity<CreatedCarDto> saveCar(@RequestBody CarRequestDto car, @PathVariable Long clientId) {
         return new ResponseEntity<>(carService.saveCar(car, clientId), HttpStatus.CREATED);
     }
 

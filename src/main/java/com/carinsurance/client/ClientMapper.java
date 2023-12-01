@@ -2,6 +2,7 @@ package com.carinsurance.client;
 
 import com.carinsurance.client.dto.ClientRequestDto;
 import com.carinsurance.client.dto.ClientResponseDto;
+import com.carinsurance.client.dto.CreatedClientDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ public interface ClientMapper {
 
 
     ClientResponseDto entityToDto(Client client);
+    CreatedClientDto createdEntityToDto(Client client);
 
     Client dtoToEntity(ClientRequestDto clientRequestDto);
 
