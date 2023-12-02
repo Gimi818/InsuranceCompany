@@ -36,7 +36,7 @@ public class CarService implements CarFacade {
         return carMapper.entityToDto(newCar);
     }
 
-    private void checkCarsInsuranceStatus(Client client) {
+    public void checkCarsInsuranceStatus(Client client) {
         List<Car> cars = client.getCars();
 
         for (Car car : cars) {
