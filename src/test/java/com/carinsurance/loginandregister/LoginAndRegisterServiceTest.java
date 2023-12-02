@@ -14,7 +14,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class LoginAndRegisterServiceTest {
+ class LoginAndRegisterServiceTest {
 
     LoginAndRegisterService service = new LoginAndRegisterService(new InMemoryLoginRepository());
 

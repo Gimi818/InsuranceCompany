@@ -20,7 +20,7 @@ public class InMemoryLoginRepository implements LoginRepository {
     public <S extends User> S save(S entity) {
         Long id = 1L;
         User user = new User(
-                id,
+
                 entity.getUsername(),
                 entity.getPassword()
         );

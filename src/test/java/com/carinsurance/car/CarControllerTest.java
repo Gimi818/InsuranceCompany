@@ -1,13 +1,15 @@
 package com.carinsurance.car;
 
 import com.carinsurance.car.dto.CarRequestDto;
-import com.carinsurance.car.dto.CarResponseDto;
+import com.carinsurance.car.dto.CreatedCarDto;
 
 
 import com.carinsurance.car.enums.CarModel;
 import com.carinsurance.car.enums.ParkingType;
-import org.hamcrest.Matchers;
+import com.carinsurance.client.Client;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +26,6 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.SerializationFea
 
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -41,56 +42,30 @@ class CarControllerTest {
 
     private static CarRequestDto carRequestDto;
     private static String carRequestDtoJson;
-    private static Car car;
-    private static CarResponseDto carResponseDto;
+    private static CreatedCarDto createdCarDto;
+    private static Client client;
 
     @BeforeEach
     void setUp() throws JsonProcessingException {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE,2010, 3.0, 21000);
-
+        carRequestDto = new CarRequestDto("Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE, 2010, 3.0, 21000);
+        client = new Client();
         carRequestDtoJson = objectMapper.writeValueAsString(carRequestDto);
-        carResponseDto = new CarResponseDto(1L, "Bmw", "X5", 30000, CarModel.CAR, ParkingType.GARAGE,2010, 3.0, 21000, null);
+        createdCarDto = new CreatedCarDto("Bmw", "X5", 2010);
 
     }
 
     @Test
+    @DisplayName("Should save car")
     void should_save_car() throws Exception {
-        given(carService.saveCar(carRequestDto)).willReturn(car);
+        given(carService.saveCar(carRequestDto, client.getId())).willReturn(createdCarDto);
 
-        mockMvc.perform(post("/cars/add")
+        mockMvc.perform(post("/cars/1")
                         .content(carRequestDtoJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-    }
-
-    @Test
-    void should_find_car_by_id() throws Exception {
-        given(carService.findCarById(1L)).willReturn(carResponseDto);
-
-        mockMvc.perform(get("/cars/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", Matchers.is(1)))
-                .andExpect(jsonPath("$.brand", Matchers.is("Bmw")))
-                .andExpect(jsonPath("$.model", Matchers.is("X5")))
-                .andExpect(jsonPath("$.carValue", Matchers.is(30000)))
-                .andExpect(jsonPath("$.yearOfManufacture", Matchers.is(2010)))
-                .andExpect(jsonPath("$.enginCapacity", Matchers.is(3.0)))
-                .andExpect(jsonPath("$.averageKmTraveledPerYear", Matchers.is(21000)));
-    }
-    @Test
-    void should_assign_policy_to_car() throws Exception {
-        // given
-        Long carId = 1L;
-        Long policyId = 2L;
-        // when
-        mockMvc.perform(put("/cars/" + carId + "/policies/" + policyId))
-                .andExpect(status().isOk());
-        // then
-        verify(carService,times(1)).assignPolicyToCar(carId, policyId);
     }
 
 }
