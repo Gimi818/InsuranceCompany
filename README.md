@@ -1,18 +1,18 @@
 
 # Insurance Company
-The application can be used by an insurance company to calculate and create OC and OC/AC insurance for customers.
+Application for creating individual Third-Party Liability (OC) and Comprehensive (AC) insurance policies for customers.
 
-In the first step, the customer must register with the application in order to receive an authentication token, which will give the customer the ability to use the functions of the application. 
+During the initial step, customers are required to register with the application to obtain an authentication token. This token grants customers access to the application's functionalities.
 
-The next step is for the client to enter his personal data and information about the vehicle. The application, using the data provided by the client and calculates the price of vehicle insurance. 
+In the subsequent step, the client is prompted to input their personal information along with details about the vehicle. The application utilizes the provided data to calculate the vehicle insurance premium.
 
-We have two types of insurance to choose from: OC or OC and AC. The algorithms for calculating the insurance price uses data such as : client's age, engine capacity, vehicle type,  garage type, vehicle price, year of production and average kilometers driven per year.
+The application offers a choice between two insurance types:  OC or  OC and AC. The algorithms used to calculate the insurance price incorporate data such as the client's age, engine capacity, vehicle type, garage type, vehicle price, year of production, and average kilometers driven per year.
 
-The client receives a 5% discount on third-party liability insurance (OC) and a 2% discount on comprehensive insurance (AC) for insuring an additional vehicle. The maximum discount for OC insurance is 40% and 25% for AC insurance. 
+The client is eligible for a 5% discount on OC and a 2% discount on AC when insuring an additional vehicle. The maximum discount for OC insurance is 40%, and for AC insurance, it is 25%.
 
-In the next step, the application creates an individual policy for the client and assigned it to the car. The policy has a unique name, type of policy, policy start and end date and insurance price. 
+In the subsequent step, the application generates an individual policy for the client. The policy includes a unique name, policy type, start and end dates, and the corresponding insurance price.
 
-I used a My SQL database to implement the relationships in the database one customer can have multiple vehicles and one vehicle can have one insurance policy. The application is deployed on Docker and has an implemented swagger.
+I used a My SQL database to implement the relationships in the database. The application is deployed on Docker and has an implemented swagger.
 
 
  ## Application is developed using following technologies:
@@ -50,8 +50,10 @@ I used a My SQL database to implement the relationships in the database one cust
     POST localhost:8080/token
     Enter your username and password to get the token.
     JSON:
-    {"username":"User",
-    "password":"Password"}
+    {
+    "username":"User",
+    "password":"Password"
+    }
     
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/2N.PNG" width="500" heigt="700"/>
   
@@ -62,18 +64,20 @@ I used a My SQL database to implement the relationships in the database one cust
   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/3N.PNG" width="500" heigt="700"/>
   
     Step 3.2 :
-    POST localhost:8080/clients/add
+    POST localhost:8080/clients
     Enter personal data. 
     JSON:
-    { "firstname": "John",
+    { 
+     "firstname": "John",
      "lastname": "Williams",
-     "age": 35}
-  
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/4N.PNG" width="500" heigt="700"/>
+     "age": 38}
+    }
+    
+  <img src="https://github.com/Gimi818/InsuranceCompany/blob/master/steps/CreateClient.PNG" width="500" heigt="700"/>
   
     Step 4 : 
-    POST localhost:8080/cars/add
-    Enter vehicle details.
+    POST localhost:8080/cars/1
+    Enter the Client ID into the URL and enter vehicle details.
     Available options for:
     carModel: CAR, LORRY.
     parkingType: GARAGE, DRIVEWAY, ROAD.
@@ -87,45 +91,30 @@ I used a My SQL database to implement the relationships in the database one cust
      "enginCapacity": 3.0,
      "averageKmTraveledPerYear": 19500}
       
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/5N.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/InsuranceCompany/blob/master/steps/AddCar.PNG" width="500" heigt="700"/>
   
+
     Step 5 : 
-    PUT localhost:8080/clients/1/cars/1
-    Assign the car to the client.
-  
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/6N.PNG" width="500" heigt="700"/>
-  
-  
-    Step 6 : 
-    POST localhost:8080/policies/OC/AC/1/cars/1
-    or
-    POST localhost:8080/policies/OC/1/cars/1
-   
+    Enter the Client ID into the URL 
     Choose policy: OC or OC and AC and create an individual policy.
+    POST localhost:8080/policies/OC/1
+    or
+    POST localhost:8080/policies/OC/AC/1
+   
+    
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/7N.PNG" width="500" heigt="700"/>
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/8N.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/InsuranceCompany/blob/master/steps/OC.PNG" width="500" heigt="700"/>
+   <img src="https://github.com/Gimi818/InsuranceCompany/blob/master/steps/OCAC.PNG" width="500" heigt="700"/>
   
-    Step 7 : 
-    PUT localhost:8080/cars/1/policies/1
-    Assign the policy to the car.
-  
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/9N.PNG" width="500" heigt="700"/>
-  
-    Step 8 : 
+ 
+    Step 6 : 
     GET localhost:8080/clients/1
     Get the result.
   
-  <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/10N.PNG" width="500" heigt="700"/>
+  <img src="https://github.com/Gimi818/InsuranceCompany/blob/master/steps/Insurance.PNG" width="500" heigt="700"/>
   
     Endpoints available in the application :
   
-   <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/endpointsN.PNG" width="500" heigt="500"/>
- 
- ## Tests in application: 
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/testsCoverage.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/TestsN1.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/TestsN2.PNG" width="500" heigt="700"/>
- <img src="https://github.com/Gimi818/CarInsurance/blob/master/steps/TestsN3.PNG" width="500" heigt="700"/>
- 
+   <img src="https://github.com/Gimi818/InsuranceCompany/blob/master/steps/swagger.PNG" width="500" heigt="500"/>
+
  
