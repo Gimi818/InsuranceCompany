@@ -12,7 +12,8 @@ The client is eligible for a 5% discount on OC and a 2% discount on AC when insu
 
 In the subsequent step, the application generates an individual policy for the client. The policy includes a unique name, policy type, start and end dates, and the corresponding insurance price.
 
-I used a My SQL database to implement the relationships in the database. The application is deployed on Docker and has an implemented swagger.
+I used a My SQL database to implement the relationships in the database. 
+The application is deployed on Docker and has an implemented swagger.
 
 
  ## Application is developed using following technologies:
