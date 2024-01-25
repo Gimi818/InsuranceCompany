@@ -10,7 +10,7 @@ The application offers a choice between two insurance types:  OC or  OC and AC. 
 
 The client is eligible for a 5% discount on OC and a 2% discount on AC when insuring an additional vehicle. The maximum discount for OC insurance is 40%, and for AC insurance, it is 25%.
 
-In the subsequent step, the application generates an individual policy for the client. The policy includes a unique name, policy type, start and end dates, and the corresponding insurance price.
+In the subsequent step, the application generates an individual policy for the client. The policy includes a unique name, policy type, start and end dates, and the corresponding insurance price .
 
 I used a My SQL database to implement the relationships in the database. 
 The application is deployed on Docker and has an implemented swagger.
